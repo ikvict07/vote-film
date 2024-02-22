@@ -14,17 +14,11 @@ import java.util.Collection;
 public class UserDetailsImpl implements UserDetails {
     private String username;
     private String password;
-
-    public static UserDetailsImpl build(VoterUser user) {
-        return new UserDetailsImpl(
-                user.getUsername(),
-                user.getPassword()
-        );
-    }
+    private Collection<? extends GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override

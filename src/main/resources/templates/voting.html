@@ -6,8 +6,23 @@
 </head>
 <body>
     <p>Voting results:</p>
+    <p>Share this code with your audience</p>
+    <p th:text="${sessionId}"></p>
     <ul>
         <li th:each="item : ${votingItems}" th:text="${item.title + ' : ' + item.votes}"></li>
     </ul>
+
+    <form th:action="@{/vote/}" method="post">
+        <label>
+            <input type="hidden" name="sessionId" th:value="${id}">
+        </label>
+        <label>
+            <input type="text" name="title" value="">
+        </label>
+        <label>
+            <input type="number" name="votes" value="">
+        </label>
+        <button type="submit" id="java">Vote</button>
+    </form>
 </body>
 </html>

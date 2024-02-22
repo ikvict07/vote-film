@@ -2,7 +2,9 @@ package org.fiit.votefilm.service;
 
 import jakarta.servlet.http.HttpSession;
 import org.fiit.votefilm.exceptions.UserAlreadyRegisteredException;
+import org.fiit.votefilm.model.SuperUser;
 import org.fiit.votefilm.model.VoterUser;
+import org.fiit.votefilm.repository.SuperUserRepository;
 import org.fiit.votefilm.repository.VoterUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,15 +26,15 @@ public class AuthenticationService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final SuperUserRepository superUserRepository;
 
-    private final UserServiceImpl userService;
 
     @Autowired
-    public AuthenticationService(AuthenticationManager authenticationManager, VoterUserRepository userRepository, PasswordEncoder passwordEncoder, UserServiceImpl userService) {
+    public AuthenticationService(AuthenticationManager authenticationManager, VoterUserRepository userRepository, PasswordEncoder passwordEncoder, SuperUserRepository superUserRepository) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.userService = userService;
+        this.superUserRepository = superUserRepository;
     }
 
     public boolean isUserLoggedIn() {
@@ -62,6 +64,7 @@ public class AuthenticationService {
         }
 
         System.out.println("user is:" + SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        System.out.println("Role is:" + SecurityContextHolder.getContext().getAuthentication().getAuthorities());
     }
 
     public void logoutUser() {
@@ -73,6 +76,14 @@ public class AuthenticationService {
             throw new UserAlreadyRegisteredException("User already exists");
         }
         userRepository.save(new VoterUser(username, passwordEncoder.encode(password)));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+    }
+
+    public void addSuperUser(String username, String password) throws UserAlreadyRegisteredException {
+        if (superUserRepository.findSuperUserByUsername(username).isPresent()) {
+            throw new UserAlreadyRegisteredException("User already exists");
+        }
+        superUserRepository.save(new SuperUser(username, passwordEncoder.encode(password)));
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
@@ -57,15 +58,21 @@ public class SecurityConfig {
                                 new CorsConfiguration().applyPermitDefaultValues())
                 )
                 .exceptionHandling(exceptions -> exceptions
-                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                        .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/auth/login/"))
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                 ).
                 authorizeRequests(authorize ->
                         authorize
-                                .requestMatchers("/vote").authenticated()
+                                .requestMatchers("/voting/**").authenticated()
+                                .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/voting-setup/**").hasAuthority("VOTING_HOST")
                                 .anyRequest().permitAll()
+                ).formLogin(
+                        formLogin -> formLogin
+                        .loginPage("/auth/login/")
+                        .permitAll()
                 );
         return http.build();
     }

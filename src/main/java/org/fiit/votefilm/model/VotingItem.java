@@ -26,6 +26,10 @@ public class VotingItem {
     @Column(name = "votes", nullable = false)
     private Long votes;
 
+    @ManyToOne
+    @JoinColumn(name = "voting_session_id")
+    private VotingSession votingSession;
+
     @Override
     public final boolean equals(Object object) {
         if (this == object) return true;
