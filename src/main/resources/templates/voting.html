@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voting</title>
+</head>
+<body>
+    <p>Voting results:</p>
+    <ul>
+        <li th:each="item : ${votingItems}" th:text="${item.title + ' : ' + item.votes}"></li>
+    </ul>
+</body>
+</html>

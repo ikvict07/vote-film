@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vote</title>
+</head>
+<body>
+    <p>Vote for your favorite programming language:</p>
+    <form th:action="@{/vote}" method="post">
+        <label>
+            <input type="text" name="title" value="">
+        </label>
+        <button type="submit" id="java">Vote</button>
+    </form>
+</body>
+</html>
