@@ -53,4 +53,14 @@ public class VotingLogic {
 
         return votingSession.get().getVotingItems();
     }
+
+    public VotingSession getVotingSession(String sessionId) {
+        Optional<VotingSession> votingSession = votingSessionRepository.findByUniqueCode(sessionId);
+
+        if (votingSession.isEmpty()) {
+            throw new IllegalArgumentException("Voting session not found");
+        }
+
+        return votingSession.get();
+    }
 }

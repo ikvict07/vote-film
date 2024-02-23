@@ -65,10 +65,9 @@ public class SecurityConfig {
                 ).
                 authorizeRequests(authorize ->
                         authorize
-                                .requestMatchers("/voting/**").authenticated()
-                                .requestMatchers("/auth/**").permitAll()
+                                .anyRequest().authenticated()
                                 .requestMatchers("/voting-setup/**").hasAuthority("VOTING_HOST")
-                                .anyRequest().permitAll()
+                                .requestMatchers("/auth/**").permitAll()
                 ).formLogin(
                         formLogin -> formLogin
                         .loginPage("/auth/login/")

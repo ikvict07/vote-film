@@ -3,26 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Voting</title>
-</head>
-<body>
-    <p>Voting results:</p>
-    <p>Share this code with your audience</p>
-    <p th:text="${sessionId}"></p>
-    <ul>
-        <li th:each="item : ${votingItems}" th:text="${item.title + ' : ' + item.votes}"></li>
-    </ul>
+    <div th:include="common.html :: commonHead"></div>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    <form th:action="@{/vote/}" method="post">
-        <label>
-            <input type="hidden" name="sessionId" th:value="${id}">
-        </label>
-        <label>
-            <input type="text" name="title" value="">
-        </label>
-        <label>
-            <input type="number" name="votes" value="">
-        </label>
-        <button type="submit" id="java">Vote</button>
-    </form>
+        .centered-text {
+            text-align: center;
+            font-size: 2em; /* Увеличиваем размер шрифта */
+        }
+    </style>
+
+</head>
+<body class="sub_page">
+<div class="hero_area">
+    <header th:insert="~{common :: header}"></header>
+    <section class="info_section layout_padding2">
+        <div class="container">
+            <p class="centered-text">Voting Session:</p>
+            <p class="centered-text" th:text="${title}"></p>
+            <p class="centered-text" th:text="${sessionId}"></p>
+            <div th:each="item : ${votingItems}" data-title="${item.title}" data-votes="${item.votes}">
+                <p class="text-center text-danger"
+                   th:text="${item.title + ' : ' + item.votes + ' (' + #numbers.formatDecimal((item.votes * 100.0 / totalVotes), 1, 2) + '%)'}"></p>
+            </div>
+        </div>
+    </section>
+    <li class="nav-item centered-text" th:if="${#authorization.expression('hasAuthority(''VOTING_HOST'')')}">
+        <a class="nav-link" th:href="@{/voting/spin/{id}(id=${sessionId})}">Start Voting</a>
+    </li>
+
+    <section class="info_section layout_padding2">
+        <div class="container">
+
+            <h1>Vote for your favorite film:</h1>
+            <form th:action="@{/vote/}" method="post">
+                <label>
+                    <input type="hidden" name="sessionId" th:value="${id}">
+                </label>
+                <label>
+                    <input type="text" name="title" value="" placeholder="Film name">
+                </label>
+                <label>
+                    <input type="number" name="votes" value="" placeholder="Points">
+                </label>
+                <button type="submit" id="java">Vote</button>
+            </form>
+        </div>
+    </section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+
+    <footer th:insert="~{common :: footer}"></footer>
+</div>
 </body>
 </html>

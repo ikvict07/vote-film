@@ -2,18 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LogIn</title>
+    <title>Registration</title>
+    <div th:include="common.html :: commonHead"></div>
+    <style>
+        #loginButton {
+            color: #b93f3f; /* Измените на нужный вам цвет */
+        }
+
+        #registerButton {
+            color: #b93f3f; /* Измените на нужный вам цвет */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        function showForm(formId) {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById(formId).style.display = 'block';
+
+            if (formId === 'loginForm') {
+                document.getElementById('loginButton').style.display = 'none';
+                document.getElementById('registerButton').style.display = 'block';
+            } else {
+                document.getElementById('loginButton').style.display = 'block';
+                document.getElementById('registerButton').style.display = 'none';
+            }
+        }
+    </script>
 </head>
-<body>
-    <p>LogIn:</p>
-    <form th:action="@{/auth/login/}" method="post">
-        <label>
-            <input type="text" name="username" value="">
-        </label>
-        <label>
-            <input type="password" name="password" value="">
-        </label>
-        <button type="submit" id="java">LogIn</button>
-    </form>
+<body class="sub_page">
+<div class="hero_area">
+    <header th:insert="~{common :: header}"></header>
+
+    <section class="info_section layout_padding">
+        <div class="container layout_padding">
+            <div class="heading_container heading_center">
+                <h2>Welcome</h2>
+            </div>
+            <div id="loginForm" style="display: none;">
+                <h2>Log In</h2>
+                <form th:action="@{/auth/login/}" method="post" class="container-fluid">
+                    <label>
+                        <input required type="text" name="username" value="" class="form-control"
+                               placeholder="Username">
+                    </label>
+                    <label>
+                        <input required type="password" name="password" value="" class="form-control"
+                               placeholder="Password">
+                    </label>
+                    <button type="submit" class="btn btn-2">Log In</button>
+                </form>
+            </div>
+
+            <div id="registerForm" style="display: none;">
+                <h2>Register</h2>
+                <form th:action="@{/auth/register/}" method="post" class="container-fluid">
+                    <label>
+                        <input required type="text" name="username" value="" class="form-control"
+                               placeholder="Username">
+                    </label>
+                    <label>
+                        <input required type="password" name="password" value="" class="form-control"
+                               placeholder="Password">
+                    </label>
+                    <button type="submit" class="btn btn-2">Register</button>
+                </form>
+            </div>
+
+            <div class="container-fluid button-container">
+                <button class="btn btn-2" id="loginButton" onclick="showForm('loginForm')">Log In</button>
+                <button class="btn btn-2" id="registerButton" onclick="showForm('registerForm')">Register</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+
+    <footer th:insert="~{common :: footer}"></footer>
+</div>
 </body>
 </html>

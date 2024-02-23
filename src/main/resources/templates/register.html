@@ -2,18 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <p>Register:</p>
-    <form th:action="@{/auth/register/}" method="post">
-        <label>
-            <input type="text" name="username" value="">
-        </label>
-        <label>
-            <input type="password" name="password" value="">
-        </label>
-        <button type="submit" id="java">Register</button>
-    </form>
+    <div class="container layout_padding">
+        <div class="heading_container heading_center">
+            <h2>Registration</h2>
+        </div>
+        <form th:action="@{/auth/register/}" method="post" class="container_border_style">
+            <label>
+                <input type="text" name="username" value="" class="form-control" placeholder="Username">
+            </label>
+            <label>
+                <input type="password" name="password" value="" class="form-control" placeholder="Password">
+            </label>
+            <button type="submit" class="btn btn-2">Register</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -20,10 +20,10 @@ public class VotingService {
 
     public VotingSession startVotingSession(String title) {
         SuperUser superUser = superUserRepository.findSuperUserByUsername(
-                SecurityContextHolder
-                        .getContext()
-                        .getAuthentication()
-                        .getName())
+                        SecurityContextHolder
+                                .getContext()
+                                .getAuthentication()
+                                .getName())
                 .orElseThrow(() -> new UsernameNotFoundException("No user exists with this username"));
 
         VotingSession votingSession = new VotingSession(superUser, title);

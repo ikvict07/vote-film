@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class RepresentationController {
     private final VotingItemRepository votingItemRepository;
@@ -22,6 +24,11 @@ public class RepresentationController {
     public RepresentationController(VotingItemRepository votingItemRepository, VotingLogic votingLogic) {
         this.votingItemRepository = votingItemRepository;
         this.votingLogic = votingLogic;
+    }
+
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/voting/enter/";
     }
 
     @GetMapping("/voting/")
@@ -37,9 +44,14 @@ public class RepresentationController {
 
     @GetMapping("/voting/{id}")
     public String votingList(Model model, @PathVariable String id) {
+        List<VotingItem> votingItems = votingLogic.getVotingItems(id);
         model.addAttribute("votingItems", votingLogic.getVotingItems(id));
         model.addAttribute("votes", votingLogic.getVotingItems(id).stream().map(VotingItem::getVotes));
         model.addAttribute("sessionId", id);
+        model.addAttribute("title", votingLogic.getVotingSession(id).getTitle());
+        Long totalVotes = votingItems.stream().mapToLong(VotingItem::getVotes).sum();
+        model.addAttribute("totalVotes", totalVotes);
+        System.out.println(totalVotes);
         return "voting";
     }
 
@@ -52,5 +64,18 @@ public class RepresentationController {
     @PostMapping("/voting/enter/")
     public String votingEnterSubmit(@RequestParam String sessionId) {
         return "redirect:/voting/" + sessionId;
+    }
+
+    @GetMapping("/voting/spin/{id}")
+    public String votingSpin(Model model, @PathVariable String id) {
+        List<VotingItem> votingItems = votingLogic.getVotingItems(id);
+        model.addAttribute("votingItems", votingLogic.getVotingItems(id));
+        model.addAttribute("votes", votingLogic.getVotingItems(id).stream().map(VotingItem::getVotes));
+        model.addAttribute("sessionId", id);
+        model.addAttribute("title", votingLogic.getVotingSession(id).getTitle());
+        Long totalVotes = votingItems.stream().mapToLong(VotingItem::getVotes).sum();
+        model.addAttribute("totalVotes", totalVotes);
+        System.out.println(totalVotes);
+        return "roulette";
     }
 }

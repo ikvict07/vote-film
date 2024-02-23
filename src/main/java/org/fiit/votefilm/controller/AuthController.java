@@ -38,11 +38,11 @@ public class AuthController {
         return "login";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/register/")
     public String registerForm() {
         return "register";
     }
-    @PostMapping("/register")
+    @PostMapping("/register/")
     public String register(@RequestParam String username, @RequestParam String password) {
         try {
             authenticationService.registerUser(username, password);
@@ -55,8 +55,14 @@ public class AuthController {
         return "register";
     }
 
-    @GetMapping("/addSuperUser")
+    @GetMapping("/addSuperUser/")
     public void addSuperUser() throws UserAlreadyRegisteredException {
         authenticationService.addSuperUser("admin", "admin");
+    }
+
+    @GetMapping("/logout/")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/auth/login/";
     }
 }
