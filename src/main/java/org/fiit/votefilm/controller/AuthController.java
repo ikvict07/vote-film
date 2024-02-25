@@ -1,20 +1,15 @@
 package org.fiit.votefilm.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.fiit.votefilm.exceptions.UserAlreadyRegisteredException;
+import org.fiit.votefilm.exceptions.AuthenticationFailedException;
 import org.fiit.votefilm.service.AuthenticationService;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Enumeration;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/auth")
@@ -26,33 +21,33 @@ public class AuthController {
     }
 
     @PostMapping("/login/")
-    public String login(@RequestParam String username, @RequestParam String password) {
-        System.out.println("HEre");
-        System.out.println("Logging in:" + username + " " + password);
-        authenticationService.loginUser(username, password);
+    public String login(HttpServletRequest request, @RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
+        try {
+            authenticationService.loginUser(username, password);
+            redirectAttributes.addFlashAttribute("error", "You are logged in");
+        } catch (AuthenticationFailedException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            String referer = request.getHeader("Referer");
+            return "redirect:" + referer;
+        }
 
-        return "login";
+        return "redirect:/voting/enter/";
     }
+
     @GetMapping("/login/")
     public String loginForm() {
         return "login";
     }
 
-    @GetMapping("/register/")
-    public String registerForm() {
-        return "register";
-    }
     @PostMapping("/register/")
-    public String register(@RequestParam String username, @RequestParam String password) {
+    public String register(@RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
         try {
             authenticationService.registerUser(username, password);
-        } catch (UserAlreadyRegisteredException e) {
-            //TODO: handle exception
-            System.out.println("Failed to register:" + username + " " + password);
-            return "register";
+        } catch (AuthenticationFailedException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/auth/login/";
         }
-        System.out.println("Registered:" + username + " " + password);
-        return "register";
+        return "redirect:/auth/login/";
     }
 
     @GetMapping("/logout/")

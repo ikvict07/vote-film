@@ -1,6 +1,8 @@
 package org.fiit.votefilm.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.fiit.votefilm.exceptions.AccessNotAllowed;
+import org.fiit.votefilm.exceptions.AuthenticationFailedException;
 import org.fiit.votefilm.exceptions.UserAlreadyRegisteredException;
 import org.fiit.votefilm.repository.VoterUserRepository;
 import org.fiit.votefilm.service.AuthenticationService;
@@ -32,14 +34,31 @@ public class AdminController {
         return "admin";
     }
 
-    @PostMapping("/addSuperUser/")
-    public void addSuperUser() throws UserAlreadyRegisteredException {
-        authenticationService.addSuperUser("admin", "admin");
+    @PostMapping("/add-super-user/")
+    public String addSuperUser(HttpServletRequest request, @RequestParam String username, @RequestParam String password) throws UserAlreadyRegisteredException {
+        try {
+            authenticationService.addSuperUser(username, password);
+        } catch (AccessNotAllowed e) {
+            return "redirect:/";
+        }
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
+    }
+
+    @GetMapping("/add-super-user/")
+    public String addSuperUserForm() {
+        return "admin-add-super";
     }
 
     @PostMapping("/set-points/")
     public String setPoints(@RequestParam String username, @RequestParam Long points, @Autowired HttpServletRequest request) {
-        pointsService.setPoints(username, points);
+        try {
+            pointsService.setPoints(username, points);
+        } catch (AccessNotAllowed e) {
+            return "redirect:/";
+        } catch (AuthenticationFailedException e) {
+            return "redirect:/auth/login/";
+        }
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
     }

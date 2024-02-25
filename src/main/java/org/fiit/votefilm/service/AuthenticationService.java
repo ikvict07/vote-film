@@ -1,6 +1,7 @@
 package org.fiit.votefilm.service;
 
-import org.fiit.votefilm.exceptions.UserAlreadyRegisteredException;
+import org.fiit.votefilm.enums.Role;
+import org.fiit.votefilm.exceptions.*;
 import org.fiit.votefilm.model.SuperUser;
 import org.fiit.votefilm.model.VoterUser;
 import org.fiit.votefilm.repository.SuperUserRepository;
@@ -10,9 +11,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 
 @Service
 public class AuthenticationService {
@@ -33,19 +37,13 @@ public class AuthenticationService {
         this.superUserRepository = superUserRepository;
     }
 
-    public boolean isUserLoggedIn() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication != null && authentication.isAuthenticated();
-    }
 
-    public void loginUser(String username, String password) {
+    public void loginUser(String username, String password) throws AuthenticationFailedException {
         if (userRepository.findByUsername(username).isEmpty()) {
-            System.out.println("User does not exist");
-            return;
+            throw new UserAreNotRegisteredException("User does not exist");
         } else {
             if (!passwordEncoder.matches(password, userRepository.findByUsername(username).get().getPassword())) {
-                System.out.println("Password is wrong");
-                return;
+                throw new WrongPasswordException("Wrong password");
             }
         }
 
@@ -55,19 +53,12 @@ public class AuthenticationService {
             Authentication authenticatedToken = authenticationManager.authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authenticatedToken);
         } catch (AuthenticationException e) {
-            System.out.println("Authentication failed: " + e.getMessage());
-            return;
+            throw new AuthenticationFailedException("Authentication failed");
         }
 
-        System.out.println("user is:" + SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        System.out.println("Role is:" + SecurityContextHolder.getContext().getAuthentication().getAuthorities());
     }
 
-    public void logoutUser() {
-        SecurityContextHolder.clearContext();
-    }
-
-    public void registerUser(String username, String password) throws UserAlreadyRegisteredException {
+    public void registerUser(String username, String password) throws AuthenticationFailedException {
         if (userRepository.findByUsername(username).isPresent()) {
             throw new UserAlreadyRegisteredException("User already exists");
         }
@@ -75,7 +66,16 @@ public class AuthenticationService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
     }
 
-    public void addSuperUser(String username, String password) throws UserAlreadyRegisteredException {
+    public void addSuperUser(String username, String password) throws UserAlreadyRegisteredException, AccessNotAllowed {
+        Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        boolean isVotingHost = authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch(Role.VOTING_HOST.getRole()::equals);
+
+        if (!isVotingHost) {
+            throw new AccessNotAllowed("You are not allowed to add points");
+        }
+
         if (superUserRepository.findSuperUserByUsername(username).isPresent()) {
             throw new UserAlreadyRegisteredException("User already exists");
         }

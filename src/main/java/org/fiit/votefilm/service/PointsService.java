@@ -1,10 +1,10 @@
 package org.fiit.votefilm.service;
 
 import org.fiit.votefilm.enums.Role;
+import org.fiit.votefilm.exceptions.AccessNotAllowed;
+import org.fiit.votefilm.exceptions.AuthenticationFailedException;
 import org.fiit.votefilm.model.VoterUser;
 import org.fiit.votefilm.repository.VoterUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class PointsService {
         this.userRepository = userRepository;
     }
 
-    public void addPoints(String username, int points) {
+    public void addPoints(String username, int points) throws AccessNotAllowed, AuthenticationFailedException {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 
         boolean isVotingHost = authorities.stream()
@@ -29,29 +29,29 @@ public class PointsService {
                 .anyMatch(Role.VOTING_HOST.getRole()::equals);
 
         if (!isVotingHost) {
-            throw new AccessDeniedException("You are not allowed to add points");
+            throw new AccessNotAllowed("You are not allowed to add points");
         }
 
 
         Optional<VoterUser> user = userRepository.findByUsername(username);
         if (user.isEmpty()) {
-            throw new IllegalArgumentException("User does not exist");
+            throw new AuthenticationFailedException("User does not exist");
         }
 
         user.get().setPoints(getPoints(username) + points);
         userRepository.save(user.get());
     }
 
-    public Long getPoints(String username) {
+    public Long getPoints(String username) throws AuthenticationFailedException {
         Optional<VoterUser> user = userRepository.findByUsername(username);
         if (user.isEmpty()) {
-            throw new IllegalArgumentException("User does not exist");
+            throw new AuthenticationFailedException("User does not exist");
         }
 
         return user.get().getPoints();
     }
 
-    public void removePoints(String username, int points) {
+    public void removePoints(String username, int points) throws AccessNotAllowed, AuthenticationFailedException {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 
         boolean isVotingHost = authorities.stream()
@@ -59,19 +59,19 @@ public class PointsService {
                 .anyMatch(Role.VOTING_HOST.getRole()::equals);
 
         if (!isVotingHost) {
-            throw new AccessDeniedException("You are not allowed to remove points");
+            throw new AccessNotAllowed("You are not allowed to remove points");
         }
 
         Optional<VoterUser> user = userRepository.findByUsername(username);
         if (user.isEmpty()) {
-            throw new IllegalArgumentException("User does not exist");
+            throw new AuthenticationFailedException("User does not exist");
         }
 
         user.get().setPoints(getPoints(username) - points);
         userRepository.save(user.get());
     }
 
-    public void setPoints(String username, Long points) {
+    public void setPoints(String username, Long points) throws AccessNotAllowed, AuthenticationFailedException {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 
         boolean isVotingHost = authorities.stream()
@@ -79,12 +79,12 @@ public class PointsService {
                 .anyMatch(Role.VOTING_HOST.getRole()::equals);
 
         if (!isVotingHost) {
-            throw new AccessDeniedException("You are not allowed to set points");
+            throw new AccessNotAllowed("You are not allowed to set points");
         }
 
         Optional<VoterUser> user = userRepository.findByUsername(username);
         if (user.isEmpty()) {
-            throw new IllegalArgumentException("User does not exist");
+            throw new AuthenticationFailedException("User does not exist");
         }
 
         user.get().setPoints(points);

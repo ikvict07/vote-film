@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserDetailsService {
         VoterUser user = userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("No user exists with this username")
         );
-        System.out.println("User found" + user.getUsername() + " " + user.getPassword() + " " + user.getRole());
         GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().name());
 
         // Create a collection of authorities

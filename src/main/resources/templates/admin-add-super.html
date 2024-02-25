@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Voting Host</title>
+    <div th:include="common.html :: commonHead"></div>
+</head>
+<body class="sub_page">
+<div class="hero_area">
+    <header th:insert="~{common :: header}"></header>
+    <section class="info_section layout_padding">
+        <div class="container layout_padding">
+            <div class="heading_container heading_center">
+                <h2>Admin panel</h2>
+            </div>
+        </div>
+    </section>
+    <section class="info_section layout_padding2">
+        <div class="container layout_padding">
+            <div id="loginForm">
+                <form th:action="@{/admin/add-super-user/}" method="post">
+                    <label>
+                        <input required type="text" name="username" value="" class="form-control"
+                               placeholder="Username">
+                    </label>
+                    <label>
+                        <input required type="password" name="password" value="" class="form-control"
+                               placeholder="Password">
+                    </label>
+                    <button type="submit" id="java">Add Super</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+</div>
+
+</body>
+</html>

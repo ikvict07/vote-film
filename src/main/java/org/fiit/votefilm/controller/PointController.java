@@ -1,5 +1,8 @@
 package org.fiit.votefilm.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import org.fiit.votefilm.exceptions.AccessNotAllowed;
+import org.fiit.votefilm.exceptions.AuthenticationFailedException;
 import org.fiit.votefilm.service.PointsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +19,28 @@ public class PointController {
     }
 
     @PostMapping("/add/")
-    public void addPoints(@RequestParam String username, @RequestParam int points) {
-        pointsService.addPoints(username, points);
+    public String addPoints(@RequestParam String username, @RequestParam int points, HttpServletRequest request) {
+        try {
+            pointsService.addPoints(username, points);
+        } catch (AccessNotAllowed e) {
+            return "redirect:/";
+        } catch (AuthenticationFailedException e) {
+            return "redirect:/auth/login/";
+        }
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @PostMapping("/remove/")
-    public void removePoints(@RequestParam String username, @RequestParam int points) {
-        pointsService.removePoints(username, points);
+    public String removePoints(@RequestParam String username, @RequestParam int points, HttpServletRequest request) {
+        try {
+            pointsService.removePoints(username, points);
+        } catch (AccessNotAllowed e) {
+            return "redirect:/";
+        } catch (AuthenticationFailedException e) {
+            return "redirect:/auth/login/";
+        }
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 }

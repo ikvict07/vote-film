@@ -1,7 +1,9 @@
 package org.fiit.votefilm.service;
 
 
-import jakarta.servlet.http.HttpServletRequest;
+import org.fiit.votefilm.exceptions.AuthenticationFailedException;
+import org.fiit.votefilm.exceptions.InvalidSessionIdException;
+import org.fiit.votefilm.exceptions.NotEnoughPoints;
 import org.fiit.votefilm.model.VoterUser;
 import org.fiit.votefilm.model.VotingItem;
 import org.fiit.votefilm.model.VotingSession;
@@ -27,21 +29,21 @@ public class VotingLogic {
         this.voterUserRepository = voterUserRepository;
     }
 
-    public void vote(String title, String sessionId, Long votes) {
+    public void vote(String title, String sessionId, Long votes) throws AuthenticationFailedException, NotEnoughPoints, InvalidSessionIdException {
 
         VoterUser user;
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        user = voterUserRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        user = voterUserRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new AuthenticationFailedException("User not found"));
 
         if (user.getPoints() < votes) {
-            throw new IllegalArgumentException("Not enough points");
+            throw new NotEnoughPoints("Not enough points");
         }
 
         Optional<VotingSession> votingSession = votingSessionRepository.findByUniqueCode(sessionId);
 
         if (votingSession.isEmpty()) {
-            throw new IllegalArgumentException("Voting session not found");
+            throw new InvalidSessionIdException("Voting session not found");
         }
 
         Optional<VotingItem> item = votingSession.get().getVotingItems().stream()
@@ -58,28 +60,27 @@ public class VotingLogic {
             votingItem.setVotes(votes);
             votingItem.setVotingSession(votingSession.get());
             votingItemRepository.save(votingItem);
-        }
-        else {
+        } else {
             item.get().setVotes(item.get().getVotes() + votes);
             votingItemRepository.save(item.get());
         }
     }
 
-    public List<VotingItem> getVotingItems(String sessionId) {
+    public List<VotingItem> getVotingItems(String sessionId) throws InvalidSessionIdException {
         Optional<VotingSession> votingSession = votingSessionRepository.findByUniqueCode(sessionId);
 
         if (votingSession.isEmpty()) {
-            throw new IllegalArgumentException("Voting session not found");
+            throw new InvalidSessionIdException("Voting session not found");
         }
 
         return votingSession.get().getVotingItems();
     }
 
-    public VotingSession getVotingSession(String sessionId) {
+    public VotingSession getVotingSession(String sessionId) throws InvalidSessionIdException {
         Optional<VotingSession> votingSession = votingSessionRepository.findByUniqueCode(sessionId);
 
         if (votingSession.isEmpty()) {
-            throw new IllegalArgumentException("Voting session not found");
+            throw new InvalidSessionIdException("Voting session not found");
         }
 
         return votingSession.get();
