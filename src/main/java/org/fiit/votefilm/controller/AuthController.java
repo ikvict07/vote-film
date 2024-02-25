@@ -55,11 +55,6 @@ public class AuthController {
         return "register";
     }
 
-    @GetMapping("/addSuperUser/")
-    public void addSuperUser() throws UserAlreadyRegisteredException {
-        authenticationService.addSuperUser("admin", "admin");
-    }
-
     @GetMapping("/logout/")
     public String logout(HttpSession session) {
         session.invalidate();

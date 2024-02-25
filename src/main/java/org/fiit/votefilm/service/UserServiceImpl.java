@@ -33,6 +33,6 @@ public class UserServiceImpl implements UserDetailsService {
         // Create a collection of authorities
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(authority);
-        return new UserDetailsImpl(user.getUsername(), user.getPassword(), authorities);
+        return new UserDetailsImpl(user.getUsername(), user.getPassword(), authorities, user.getPoints());
     }
 }

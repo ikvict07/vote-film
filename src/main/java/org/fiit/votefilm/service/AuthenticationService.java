@@ -1,6 +1,5 @@
 package org.fiit.votefilm.service;
 
-import jakarta.servlet.http.HttpSession;
 import org.fiit.votefilm.exceptions.UserAlreadyRegisteredException;
 import org.fiit.votefilm.model.SuperUser;
 import org.fiit.votefilm.model.VoterUser;
@@ -12,11 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Enumeration;
 
 @Service
 public class AuthenticationService {

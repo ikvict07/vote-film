@@ -41,7 +41,7 @@
                     ctx.beginPath();
                     ctx.moveTo(0, 0);
                     ctx.arc(0, 0, radius, startAngle, startAngle + sliceAngle);
-                    ctx.fillStyle = `hsl(${index * 360 / votingItems.length}, 100%, 50%)`;
+                    ctx.fillStyle = `hsl(${index * 500 / votingItems.length}, 100%, 50%)`;
                     ctx.fill();
 
                     // Текст
@@ -50,7 +50,7 @@
                     ctx.save();
                     ctx.rotate(textAngle);
                     ctx.textAlign = "center";
-                    ctx.fillStyle = "#fff";
+                    ctx.fillStyle = "#000000";
                     ctx.font = "16px Arial";
                     ctx.fillText(item.title, textRadius, 0);
                     ctx.restore();
@@ -62,12 +62,24 @@
             }
 
             function drawMarker() {
-                ctx.fillStyle = 'red';
+                // Рисуем обводку
+                ctx.strokeStyle = 'black'; // Цвет обводки
+                ctx.lineWidth = 4; // Толщина обводки
                 ctx.beginPath();
                 ctx.moveTo(radius - 10, -10);
                 ctx.lineTo(radius, 0);
                 ctx.lineTo(radius - 10, 10);
-                ctx.fill();
+                ctx.closePath(); // Закрываем путь
+                ctx.stroke(); // Рисуем обводку
+
+                // Рисуем заливку
+                ctx.fillStyle = 'red'; // Цвет заливки
+                ctx.beginPath();
+                ctx.moveTo(radius - 10, -10);
+                ctx.lineTo(radius, 0);
+                ctx.lineTo(radius - 10, 10);
+                ctx.closePath(); // Закрываем путь
+                ctx.fill(); // Рисуем заливку
             }
 
             function spinRoulette() {

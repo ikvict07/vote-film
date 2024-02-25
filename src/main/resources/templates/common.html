@@ -29,10 +29,20 @@
                     <li class="nav-item" th:if="${#authorization.expression('hasAuthority(''VOTING_HOST'')')}">
                         <a class="nav-link" href="/voting-setup/start/">Start Voting</a>
                     </li>
+                    <li class="nav-item" th:if="${#authorization.expression('hasAuthority(''VOTING_HOST'')')}">
+                        <a class="nav-link" href="/admin/">Admin Panel</a>
+                    </li>
                     <li class="nav-item" th:if="${#authorization.expression('isAnonymous()')}">
                         <a class="nav-link" href="/auth/login/">Log In</a>
                     </li>
+                    <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a class="nav-link" href="/auth/logout/">Log Out</a>
+                    </li>
+                    <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a class="nav-link text-danger">Points: <span th:text="${#authentication.principal.points}"></span></a>
+                    </li>
                 </ul>
+
             </div>
         </nav>
     </div>

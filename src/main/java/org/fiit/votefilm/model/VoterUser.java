@@ -27,5 +27,6 @@ public class VoterUser {
         this.username = username;
         this.password = password;
         this.role = Role.COMMON_USER;
+        this.points = 100L;
     }
 }
