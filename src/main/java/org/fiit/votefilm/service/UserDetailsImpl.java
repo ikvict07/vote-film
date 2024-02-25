@@ -3,13 +3,14 @@ package org.fiit.votefilm.service;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Setter;
-import org.fiit.votefilm.model.VoterUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+/**
+ * User details implementation.
+ */
 @AllArgsConstructor
 @Data
 public class UserDetailsImpl implements UserDetails {

@@ -18,6 +18,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+/**
+ * Service for authentication.
+ */
 @Service
 public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
@@ -37,10 +40,18 @@ public class AuthenticationService {
         this.superUserRepository = superUserRepository;
     }
 
-
+    /**
+     * Log in a user.
+     *
+     * @param username Username of the user.
+     * @param password Password of the user.
+     * @throws AuthenticationFailedException If the authentication failed.
+     * @throws UserIsNotRegisteredException  If the user is not registered.
+     * @throws WrongPasswordException        If the password is wrong.
+     */
     public void loginUser(String username, String password) throws AuthenticationFailedException {
         if (userRepository.findByUsername(username).isEmpty()) {
-            throw new UserAreNotRegisteredException("User does not exist");
+            throw new UserIsNotRegisteredException("User does not exist");
         } else {
             if (!passwordEncoder.matches(password, userRepository.findByUsername(username).get().getPassword())) {
                 throw new WrongPasswordException("Wrong password");
@@ -58,6 +69,14 @@ public class AuthenticationService {
 
     }
 
+    /**
+     * Register a user.
+     *
+     * @param username Username of the user.
+     * @param password Password of the user.
+     * @throws AuthenticationFailedException  If the authentication failed.
+     * @throws UserAlreadyRegisteredException If the user is already registered.
+     */
     public void registerUser(String username, String password) throws AuthenticationFailedException {
         if (userRepository.findByUsername(username).isPresent()) {
             throw new UserAlreadyRegisteredException("User already exists");
@@ -66,6 +85,14 @@ public class AuthenticationService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
     }
 
+    /**
+     * Add a super user. (Voting host)
+     *
+     * @param username Username of the super user. (Voting host)
+     * @param password Password of the super user. (Voting host)
+     * @throws UserAlreadyRegisteredException If the super user is already registered.
+     * @throws AccessNotAllowed               If the user is not allowed to add a super user.
+     */
     public void addSuperUser(String username, String password) throws UserAlreadyRegisteredException, AccessNotAllowed {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         boolean isVotingHost = authorities.stream()

@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Logic for voting.
+ */
 @Service
 public class VotingLogic {
     private final VotingItemRepository votingItemRepository;
@@ -29,6 +32,16 @@ public class VotingLogic {
         this.voterUserRepository = voterUserRepository;
     }
 
+    /**
+     * Vote for a voting item.
+     *
+     * @param title     Title of the voting item.
+     * @param sessionId Session ID of the voting session.
+     * @param votes     Votes to add.
+     * @throws AuthenticationFailedException If the user is not found.
+     * @throws NotEnoughPoints               If the user does not have enough points.
+     * @throws InvalidSessionIdException     If the session ID is invalid.
+     */
     public void vote(String title, String sessionId, Long votes) throws AuthenticationFailedException, NotEnoughPoints, InvalidSessionIdException {
 
         VoterUser user;
@@ -66,6 +79,13 @@ public class VotingLogic {
         }
     }
 
+    /**
+     * Get voting items of a voting session.
+     *
+     * @param sessionId Session ID of the voting session.
+     * @return Voting items of the voting session.
+     * @throws InvalidSessionIdException If the session ID is invalid.
+     */
     public List<VotingItem> getVotingItems(String sessionId) throws InvalidSessionIdException {
         Optional<VotingSession> votingSession = votingSessionRepository.findByUniqueCode(sessionId);
 
@@ -76,6 +96,13 @@ public class VotingLogic {
         return votingSession.get().getVotingItems();
     }
 
+    /**
+     * Get a voting session.
+     *
+     * @param sessionId Session ID of the voting session.
+     * @return Voting session with the given session ID.
+     * @throws InvalidSessionIdException If the session ID is invalid.
+     */
     public VotingSession getVotingSession(String sessionId) throws InvalidSessionIdException {
         Optional<VotingSession> votingSession = votingSessionRepository.findByUniqueCode(sessionId);
 

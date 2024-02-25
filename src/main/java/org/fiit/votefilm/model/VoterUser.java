@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.fiit.votefilm.enums.Role;
 
+/**
+ * Entity representing a voter user.
+ */
 @Entity
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)

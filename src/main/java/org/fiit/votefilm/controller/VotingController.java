@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * Controller for the voting page.
+ */
 @Controller
 public class VotingController {
 
@@ -18,6 +21,17 @@ public class VotingController {
     public VotingController(VotingLogic votingLogic) {
         this.votingLogic = votingLogic;
     }
+
+    /**
+     * Handles POST requests to vote for a movie.
+     *
+     * @param title              the title of the movie
+     * @param sessionId          the unique code of the voting session
+     * @param votes              the number of votes to add
+     * @param request            the HttpServletRequest object
+     * @param redirectAttributes the RedirectAttributes object
+     * @return a redirect URL depending on the outcome of the operation
+     */
 
     @PostMapping("/vote/")
     public String voteSubmit(@RequestParam String title, @RequestParam String sessionId, @RequestParam Long votes, HttpServletRequest request, RedirectAttributes redirectAttributes) {

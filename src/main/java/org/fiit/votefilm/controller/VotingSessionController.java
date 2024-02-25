@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * Controller for the voting setup page.
+ */
 @Controller
 @RequestMapping("/voting-setup")
 public class VotingSessionController {
@@ -20,11 +23,23 @@ public class VotingSessionController {
         this.votingService = votingService;
     }
 
+    /**
+     * Handles GET requests to the voting-start page.
+     *
+     * @return the voting-start view
+     */
     @GetMapping("/start/")
     public String getStartPage() {
         return "voting-start";
     }
 
+    /**
+     * Handles POST requests to start a voting session.
+     *
+     * @param title              the title of the voting session
+     * @param redirectAttributes the RedirectAttributes object
+     * @return a redirect URL depending on the outcome of the operation
+     */
     @PostMapping("/start/submit/")
     public String startVotingSession(@RequestParam String title, RedirectAttributes redirectAttributes) {
         VotingSession votingSession;

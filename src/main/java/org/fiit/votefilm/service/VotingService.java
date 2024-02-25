@@ -8,6 +8,9 @@ import org.fiit.votefilm.repository.VotingSessionRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service for voting.
+ */
 @Service
 public class VotingService {
     private final VotingSessionRepository votingRepository;
@@ -18,6 +21,13 @@ public class VotingService {
         this.superUserRepository = superUserRepository;
     }
 
+    /**
+     * Start a voting session.
+     *
+     * @param title Title of the voting session.
+     * @return Voting session.
+     * @throws AuthenticationFailedException If the user is not found.
+     */
     public VotingSession startVotingSession(String title) throws AuthenticationFailedException {
         SuperUser superUser = superUserRepository.findSuperUserByUsername(
                         SecurityContextHolder

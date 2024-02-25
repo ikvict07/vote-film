@@ -1,11 +1,15 @@
 package org.fiit.votefilm.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import org.fiit.votefilm.enums.Role;
 
 import java.util.List;
 
+/**
+ * Entity representing a super user. (Voting host)
+ */
 @Data
 @Entity
 public class SuperUser extends VoterUser {

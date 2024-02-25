@@ -14,6 +14,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * Controller for the representation page.
+ */
 @Controller
 public class RepresentationController {
     private final VotingItemRepository votingItemRepository;
@@ -24,11 +27,22 @@ public class RepresentationController {
         this.votingLogic = votingLogic;
     }
 
+    /**
+     * Handles GET requests to the index page.
+     *
+     * @return redirect to the voting page
+     */
     @GetMapping("/")
     public String index() {
         return "redirect:/voting/enter/";
     }
 
+    /**
+     * Handles GET requests to the voting page.
+     *
+     * @param model the Model object
+     * @return the voting view
+     */
     @GetMapping("/voting/")
     public String votingList(Model model) {
         model.addAttribute("votingItems", votingItemRepository.findAll());
@@ -36,28 +50,63 @@ public class RepresentationController {
         return "voting";
     }
 
+    /**
+     * Handles GET requests to the voting page for a specific session.
+     *
+     * @param model              the Model object
+     * @param id                 the unique code of the voting session
+     * @param redirectAttributes the RedirectAttributes object
+     * @return the voting view
+     */
     @GetMapping("/voting/{id}")
     public String votingList(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
         if (addVotingItemsToModel(model, id, redirectAttributes)) return "redirect:/voting/enter/";
         return "voting";
     }
 
+    /**
+     * Handles GET requests to the voting enter page.
+     *
+     * @return the voting enter view
+     */
     @GetMapping("/voting/enter/")
     public String votingEnter() {
         return "voting-enter";
     }
 
+    /**
+     * Handles POST requests to the voting enter page.
+     *
+     * @param sessionId the unique code of the voting session
+     * @return a redirect URL depending on the outcome of the operation
+     */
     @PostMapping("/voting/enter/")
     public String votingEnterSubmit(@RequestParam String sessionId) {
         return "redirect:/voting/" + sessionId;
     }
 
+    /**
+     * Handles GET requests to the voting spin page.
+     *
+     * @param model              the Model object
+     * @param id                 the unique code of the voting session
+     * @param redirectAttributes the RedirectAttributes object
+     * @return the roulette view
+     */
     @GetMapping("/voting/spin/{id}")
     public String votingSpin(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
         if (addVotingItemsToModel(model, id, redirectAttributes)) return "redirect:/voting/enter/";
         return "roulette";
     }
 
+    /**
+     * Adds voting items to the model for the voting page.
+     *
+     * @param model              the Model object
+     * @param id                 the unique code of the voting session
+     * @param redirectAttributes the RedirectAttributes object
+     * @return true if an InvalidSessionIdException is caught, false otherwise
+     */
     private boolean addVotingItemsToModel(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
         List<VotingItem> votingItems;
         try {

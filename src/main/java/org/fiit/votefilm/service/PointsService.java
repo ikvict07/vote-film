@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Optional;
 
+/**
+ * Service for points.
+ */
 @Service
 public class PointsService {
 
@@ -20,6 +23,15 @@ public class PointsService {
     public PointsService(VoterUserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    /**
+     * Add points to a user.
+     *
+     * @param username Username of the user.
+     * @param points   Points to add.
+     * @throws AccessNotAllowed              If the user is not allowed to add points.
+     * @throws AuthenticationFailedException If the user does not exist.
+     */
 
     public void addPoints(String username, int points) throws AccessNotAllowed, AuthenticationFailedException {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
@@ -42,6 +54,13 @@ public class PointsService {
         userRepository.save(user.get());
     }
 
+    /**
+     * Get points of a user.
+     *
+     * @param username Username of the user.
+     * @return Points of the user.
+     * @throws AuthenticationFailedException If the user does not exist.
+     */
     public Long getPoints(String username) throws AuthenticationFailedException {
         Optional<VoterUser> user = userRepository.findByUsername(username);
         if (user.isEmpty()) {
@@ -51,6 +70,14 @@ public class PointsService {
         return user.get().getPoints();
     }
 
+    /**
+     * Remove points from a user.
+     *
+     * @param username Username of the user.
+     * @param points   Points to remove.
+     * @throws AccessNotAllowed If the user is not allowed to remove points.
+     * @throws AuthenticationFailedException If the user does not exist.
+     */
     public void removePoints(String username, int points) throws AccessNotAllowed, AuthenticationFailedException {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 
@@ -71,6 +98,14 @@ public class PointsService {
         userRepository.save(user.get());
     }
 
+    /**
+     * Set points of a user.
+     *
+     * @param username Username of the user.
+     * @param points   Points to set.
+     * @throws AccessNotAllowed If the user is not allowed to set points.
+     * @throws AuthenticationFailedException If the user does not exist.
+     */
     public void setPoints(String username, Long points) throws AccessNotAllowed, AuthenticationFailedException {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 

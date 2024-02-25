@@ -19,6 +19,9 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
 import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
+/**
+ * Configuration of security.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -29,16 +32,33 @@ public class SecurityConfig {
         this.userService = userService;
     }
 
+    /**
+     * Configuration of password encoder.
+     *
+     * @return PasswordEncoder
+     */
     @Bean
     protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Configuration of authentication manager.
+     * @param authenticationConfiguration AuthenticationConfiguration
+     * @return AuthenticationManager
+     * @throws Exception
+     */
     @Bean
     protected AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    /**
+     * Configuration of authentication manager.
+     * @param authenticationManagerBuilder AuthenticationManagerBuilder
+     * @return AuthenticationManagerBuilder
+     * @throws Exception
+     */
     @Bean
     @Primary
     protected AuthenticationManagerBuilder customAuthenticationManagerBuilder(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -46,6 +66,12 @@ public class SecurityConfig {
         return authenticationManagerBuilder;
     }
 
+    /**
+     * Configuration of security filter chain.
+     * @param http HttpSecurity
+     * @return SecurityFilterChain
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.

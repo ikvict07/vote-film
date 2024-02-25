@@ -9,6 +9,9 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 
+/**
+ * Entity representing a voting item.
+ */
 @Setter
 @Getter
 @Entity

@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Service for user details.
+ */
 @Service
 public class UserServiceImpl implements UserDetailsService {
     private VoterUserRepository userRepository;

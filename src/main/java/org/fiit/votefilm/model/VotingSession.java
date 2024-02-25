@@ -6,6 +6,9 @@ import lombok.Data;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Entity representing a voting session.
+ */
 @Data
 @Entity
 public class VotingSession {
