@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/css/responsive.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
         const error = /*[[${error}]]*/ 'default';
@@ -27,6 +28,21 @@
             }, 5000);
         }
         /*]]>*/
+    </script>
+    <script>
+        function updatePoints() {
+            $.ajax({
+                url: '/points/get/', // URL вашего API, который возвращает количество очков пользователя
+                type: 'GET',
+                success: function (data) {
+                    // Обновляем текст элемента с очками
+                    $('.points').text(data);
+                }
+            });
+        }
+
+        // Вызываем функцию updatePoints каждые 5 секунд
+        setInterval(updatePoints, 5000);
     </script>
 </head>
 <body class="sub_page">
@@ -62,7 +78,7 @@
                         <a class="nav-link" href="/auth/logout/">Log Out</a>
                     </li>
                     <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                        <a class="nav-link text-danger">Points: <span th:text="${#authentication.principal.points}"></span></a>
+                        <a class="nav-link text-danger">Points: <span class="points"></span></a>
                     </li>
                 </ul>
 

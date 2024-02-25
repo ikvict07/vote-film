@@ -125,4 +125,5 @@ public class PointsService {
         user.get().setPoints(points);
         userRepository.save(user.get());
     }
+
 }
