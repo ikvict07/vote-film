@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+    <div th:include="common.html :: commonHead"></div>
+</head>
+<body class="sub_page">
+<div class="hero_area">
+    <header th:insert="~{common :: header}"></header>
+    <section class="info_section layout_padding">
+        <div class="container layout_padding">
+            <div class="heading_container heading_center">
+                <h2>Admin panel</h2>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="info_section layout_padding2">
+        <div class="container layout_padding">
+            <div th:each="user : ${users}" data-title="${item.title}" data-votes="${item.votes}">
+                <p class="text-center text-danger"
+                   th:text="${user.getUsername() + ' : ' + user.getPoints()}"></p>
+                <div id="loginForm">
+                    <form th:action="@{/admin/set-points/}" method="post">
+                        <label>
+                            <input type="hidden" name="username" th:value="${user.getUsername()}">
+                        </label>
+                        <label>
+                            <input type="number" name="points" value="" placeholder="Points">
+                        </label>
+                        <button type="submit" id="java">Set Points</button>
+                    </form>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+
+</div>
+</body>
+</html>

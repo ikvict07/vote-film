@@ -1,20 +1,21 @@
 package org.fiit.votefilm.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.fiit.votefilm.exceptions.UserAlreadyRegisteredException;
+import org.fiit.votefilm.exceptions.AuthenticationFailedException;
 import org.fiit.votefilm.service.AuthenticationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Enumeration;
-
+/**
+ * Controller for the authentication page.
+ */
 @Controller
+@RequestMapping("/auth")
 public class AuthController {
     private final AuthenticationService authenticationService;
 
@@ -22,33 +23,67 @@ public class AuthController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
-        System.out.println("Logging in:" + username + " " + password);
-        authenticationService.loginUser(username, password);
-        session.setAttribute("username", username);
+    /**
+     * Handles POST requests for user login.
+     *
+     * @param request            the HttpServletRequest object
+     * @param username           the username of the user
+     * @param password           the password of the user
+     * @param redirectAttributes the RedirectAttributes object
+     * @return a redirect URL depending on the outcome of the operation
+     */
+    @PostMapping("/login/")
+    public String login(HttpServletRequest request, @RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
+        try {
+            authenticationService.loginUser(username, password);
+        } catch (AuthenticationFailedException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            String referer = request.getHeader("Referer");
+            return "redirect:" + referer;
+        }
 
-        return "redirect:/voting";
+        return "redirect:/voting/enter/";
     }
-    @GetMapping("/login")
+
+    /**
+     * Handles GET requests to the login form.
+     *
+     * @return the login view
+     */
+
+    @GetMapping("/login/")
     public String loginForm() {
         return "login";
     }
 
-    @GetMapping("/register")
-    public String registerForm() {
-        return "register";
-    }
-    @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password) {
+    /**
+     * Handles POST requests for user registration.
+     *
+     * @param username           the username of the new user
+     * @param password           the password of the new user
+     * @param redirectAttributes the RedirectAttributes object
+     * @return a redirect URL depending on the outcome of the operation
+     */
+    @PostMapping("/register/")
+    public String register(@RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
         try {
             authenticationService.registerUser(username, password);
-        } catch (UserAlreadyRegisteredException e) {
-            //TODO: handle exception
-            System.out.println("Failed to register:" + username + " " + password);
-            return "register";
+        } catch (AuthenticationFailedException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/auth/login/";
         }
-        System.out.println("Registered:" + username + " " + password);
-        return "register";
+        return "redirect:/auth/login/";
+    }
+
+    /**
+     * Handles GET requests for user logout.
+     *
+     * @param session the HttpSession object
+     * @return a redirect URL to the login page
+     */
+    @GetMapping("/logout/")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/auth/login/";
     }
 }

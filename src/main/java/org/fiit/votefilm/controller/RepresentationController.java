@@ -1,32 +1,126 @@
 package org.fiit.votefilm.controller;
 
-import jakarta.servlet.http.HttpSession;
+import org.fiit.votefilm.exceptions.InvalidSessionIdException;
 import org.fiit.votefilm.model.VotingItem;
 import org.fiit.votefilm.repository.VotingItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.fiit.votefilm.service.VotingLogic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
+/**
+ * Controller for the representation page.
+ */
 @Controller
 public class RepresentationController {
     private final VotingItemRepository votingItemRepository;
-    public RepresentationController(VotingItemRepository votingItemRepository) {
+    private final VotingLogic votingLogic;
+
+    public RepresentationController(VotingItemRepository votingItemRepository, VotingLogic votingLogic) {
         this.votingItemRepository = votingItemRepository;
+        this.votingLogic = votingLogic;
     }
 
-    @GetMapping("/voting")
-    public String votingList(Model model, HttpSession session) {
+    /**
+     * Handles GET requests to the index page.
+     *
+     * @return redirect to the voting page
+     */
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/voting/enter/";
+    }
 
-        System.out.println("user is:" + SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        SecurityContextHolder.getContext().getAuthentication().getAuthorities().forEach(System.out::println);
-        System.out.println("session is:" + session.getAttribute("username"));
+    /**
+     * Handles GET requests to the voting page.
+     *
+     * @param model the Model object
+     * @return the voting view
+     */
+    @GetMapping("/voting/")
+    public String votingList(Model model) {
         model.addAttribute("votingItems", votingItemRepository.findAll());
         model.addAttribute("votes", votingItemRepository.findAll().stream().map(VotingItem::getVotes));
         return "voting";
+    }
+
+    /**
+     * Handles GET requests to the voting page for a specific session.
+     *
+     * @param model              the Model object
+     * @param id                 the unique code of the voting session
+     * @param redirectAttributes the RedirectAttributes object
+     * @return the voting view
+     */
+    @GetMapping("/voting/{id}")
+    public String votingList(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
+        if (addVotingItemsToModel(model, id, redirectAttributes)) return "redirect:/voting/enter/";
+        return "voting";
+    }
+
+    /**
+     * Handles GET requests to the voting enter page.
+     *
+     * @return the voting enter view
+     */
+    @GetMapping("/voting/enter/")
+    public String votingEnter() {
+        return "voting-enter";
+    }
+
+    /**
+     * Handles POST requests to the voting enter page.
+     *
+     * @param sessionId the unique code of the voting session
+     * @return a redirect URL depending on the outcome of the operation
+     */
+    @PostMapping("/voting/enter/")
+    public String votingEnterSubmit(@RequestParam String sessionId) {
+        return "redirect:/voting/" + sessionId;
+    }
+
+    /**
+     * Handles GET requests to the voting spin page.
+     *
+     * @param model              the Model object
+     * @param id                 the unique code of the voting session
+     * @param redirectAttributes the RedirectAttributes object
+     * @return the roulette view
+     */
+    @GetMapping("/voting/spin/{id}")
+    public String votingSpin(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
+        if (addVotingItemsToModel(model, id, redirectAttributes)) return "redirect:/voting/enter/";
+        return "roulette";
+    }
+
+    /**
+     * Adds voting items to the model for the voting page.
+     *
+     * @param model              the Model object
+     * @param id                 the unique code of the voting session
+     * @param redirectAttributes the RedirectAttributes object
+     * @return true if an InvalidSessionIdException is caught, false otherwise
+     */
+    private boolean addVotingItemsToModel(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
+        List<VotingItem> votingItems;
+        try {
+            votingItems = votingLogic.getVotingItems(id);
+            model.addAttribute("votingItems", votingLogic.getVotingItems(id));
+            model.addAttribute("votes", votingLogic.getVotingItems(id).stream().map(VotingItem::getVotes));
+            model.addAttribute("sessionId", id);
+            model.addAttribute("title", votingLogic.getVotingSession(id).getTitle());
+        } catch (InvalidSessionIdException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return true;
+        }
+        Long totalVotes = votingItems.stream().mapToLong(VotingItem::getVotes).sum();
+        model.addAttribute("totalVotes", totalVotes);
+        return false;
     }
 }

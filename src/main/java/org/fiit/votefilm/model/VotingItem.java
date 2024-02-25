@@ -9,6 +9,9 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 
+/**
+ * Entity representing a voting item.
+ */
 @Setter
 @Getter
 @Entity
@@ -25,6 +28,10 @@ public class VotingItem {
 
     @Column(name = "votes", nullable = false)
     private Long votes;
+
+    @ManyToOne
+    @JoinColumn(name = "voting_session_id")
+    private VotingSession votingSession;
 
     @Override
     public final boolean equals(Object object) {
