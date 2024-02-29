@@ -41,3 +41,4 @@ public class VotingService {
     }
 
 }
+//         if (votingSession.get().getVotingItems().stream().noneMatch(votingItem -> votingItem.getTitle().equals(title))) {
