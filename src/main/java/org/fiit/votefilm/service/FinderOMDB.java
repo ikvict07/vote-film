@@ -13,9 +13,9 @@ import java.io.IOException;
 
 @Component
 public class FinderOMDB implements FilmFinder {
+    private final ObjectMapper mapper;
     @Value("${api.omdb.key}")
     private String apiKey;
-    private final ObjectMapper mapper;
 
     public FinderOMDB(ObjectMapper mapper) {
         this.mapper = mapper;
@@ -23,7 +23,12 @@ public class FinderOMDB implements FilmFinder {
 
     @Override
     public ResponseEntity<?> findFilm(String title) {
-        return null;
+        try {
+            return sendRequest(title);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Internal server error");
+        }
     }
 
     private String prepareTitle(String title) {

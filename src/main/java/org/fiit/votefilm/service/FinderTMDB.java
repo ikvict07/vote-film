@@ -30,7 +30,12 @@ public class FinderTMDB implements FilmFinder {
 
     @Override
     public ResponseEntity<?> findFilm(String title) {
-        return null;
+        try {
+            return sendRequest(title);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Internal server error");
+        }
     }
 
     private String prepareTitle(String title) {
