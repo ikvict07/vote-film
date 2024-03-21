@@ -1,7 +1,10 @@
 package org.fiit.votefilm.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.fiit.votefilm.exceptions.InvalidSessionIdException;
 import org.fiit.votefilm.model.Film;
+import org.fiit.votefilm.model.OMDBFilm;
+import org.fiit.votefilm.model.TMDBFilm;
 import org.fiit.votefilm.model.VotingItem;
 import org.fiit.votefilm.service.FilmFactory;
 import org.fiit.votefilm.service.VotingLogic;
@@ -119,11 +122,22 @@ public class RepresentationController {
     }
 
     @GetMapping("/voting/film")
-    private String filmInfo(Model model, @RequestParam String title) {
+    private String filmInfo(Model model, @RequestParam String title, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         System.out.println("TITLE IS: " + title);
-        Film film = filmFactory.getFilm(title).orElseThrow();
-        model.addAttribute("film", film);
-        System.out.println(film);
-        return "film-info";
+        Film film = filmFactory.getFilm(title).orElse(null);
+
+        if (film == null) {
+            redirectAttributes.addFlashAttribute("error", "Film not found in the database");
+            return "redirect:" + request.getHeader("Referer");
+        }
+        if (film instanceof OMDBFilm omdbFilm) {
+            model.addAttribute("film", omdbFilm);
+            return "film-info-omdb";
+        } else if (film instanceof TMDBFilm tmdbFilm) {
+            model.addAttribute("film", tmdbFilm);
+            return "film-info-tmdb";
+        }
+        redirectAttributes.addFlashAttribute("error", "Film not found in the database");
+        return "redirect:" + request.getHeader("Referer");
     }
 }

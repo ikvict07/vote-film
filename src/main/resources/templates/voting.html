@@ -26,9 +26,28 @@
             <p class="centered-text">Voting Session:</p>
             <p class="centered-text" th:text="${title}"></p>
             <p class="centered-text" th:text="${sessionId}"></p>
-            <div th:each="item : ${votingItems}" data-title="${item.title}" data-votes="${item.votes}">
+            <div th:each="item : ${votingItems}" data-title="${item.title}" data-votes="${item.votes}"
+                 style="display: flex; align-items: center; justify-content: center;">
                 <p class="text-center text-danger"
-                   th:text="${item.title + ' : ' + item.votes + ' (' + #numbers.formatDecimal((item.votes * 100.0 / totalVotes), 1, 2) + '%)'}"></p>
+                   th:text="${item.title + ' : ' + item.votes + ' (' + #numbers.formatDecimal((item.votes * 100.0 / totalVotes), 1, 2) + '%)'}"
+                   style="margin-right: 10px; display: flex; align-items: center; margin-bottom: 0"></p>
+                <form th:action="@{/voting/film}" method="get"
+                      style="display: flex; align-items: center; vertical-align: top">
+                    <input type="hidden" name="title" th:value="${item.title}">
+                    <button type="submit" class="centered-text" style="background-color: #f44336; /* Red */
+                                                        border: none;
+                                                        color: white;
+                                                        padding: 5px 10px;
+                                                        text-align: center;
+                                                        text-decoration: none;
+                                                        display: inline-block;
+                                                        font-size: 12px;
+                                                        margin: 4px 2px;
+                                                        cursor: pointer;
+                                                        vertical-align: top;
+                                                        border-radius: 12px;">Info
+                    </button>
+                </form>
             </div>
         </div>
     </section>

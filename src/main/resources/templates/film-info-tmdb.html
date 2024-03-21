@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Film Information</title>
+    <div th:include="common.html :: commonHead"></div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="sub_page">
+<div class="hero_area">
+    <header th:insert="~{common :: header}"></header>
+
+    <section class="info_section layout_padding2">
+        <div class="container">
+            <h1><span th:text="${film.getTitle()}"></span></h1>
+            <p><img th:src="${film.getPoster()}" alt="Poster"></p>
+            <p><span th:text="${film.getDescription()}"></span></p>
+            <p><span style="color:red;">Year:</span> <span th:text="${film.getYear()}"></span></p>
+            <p><span style="color:red;">Genre:</span> <span th:text="${film.getGenre()}"></span></p>
+            <p><span style="color:red;">Director:</span> <span th:text="${film.getDirector()}"></span></p>
+            <p><span style="color:red;">Vote Average:</span> <span th:text="${film.getVoteAverage()}"></span></p>
+            <p><span style="color:red;">Popularity:</span> <span th:text="${film.getPopularity()}"></span></p>
+            <p><span style="color:red;">Language:</span> <span th:text="${film.getLanguage()}"></span></p>
+
+        </div>
+    </section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+
+    <footer th:insert="~{common :: footer}"></footer>
+</div>
+</body>
+</html>

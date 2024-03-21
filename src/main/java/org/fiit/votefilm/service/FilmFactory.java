@@ -33,11 +33,13 @@ public class FilmFactory {
 
     public Optional<? extends Film> getFilm(String title) {
         Optional<AbstractFilm> omdbFilm = omdbFilmRepository.findByTitle(title);
-        System.out.println("is present??: " + omdbFilm.isPresent());
-        Optional<AbstractFilm> tmdbFilm = tmdbFilmRepository.findByTitle(title);
         if (omdbFilm.isPresent()) {
             return Optional.of((OMDBFilm) omdbFilm.get());
-        } else if (tmdbFilm.isPresent()) {
+        }
+        System.out.println("is present??: " + omdbFilm.isPresent());
+        Optional<AbstractFilm> tmdbFilm = tmdbFilmRepository.findByTitle(title);
+
+        if (tmdbFilm.isPresent()) {
             return Optional.of((TMDBFilm) tmdbFilm.get());
         }
 
