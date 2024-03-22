@@ -90,9 +90,10 @@ public class SecurityConfig {
                 authorizeHttpRequests(authorize ->
                         authorize
                                 .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/voting/**").permitAll() // TODO: remove
                                 .requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()
                                 .requestMatchers("/voting-setup/**").hasAuthority("VOTING_HOST")
+                                .requestMatchers("/admin/create-super-user/").permitAll() // TODO:THIS IS FOR TESTING ONLY
+                                .requestMatchers("/admin/**").hasAuthority("VOTING_HOST")
                                 .anyRequest().authenticated()
                 );
 

@@ -109,4 +109,12 @@ public class AuthenticationService {
         superUserRepository.save(new SuperUser(username, passwordEncoder.encode(password)));
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
     }
+
+    public void addSuperWithoutPermission(String username, String password) throws UserAlreadyRegisteredException {
+        if (superUserRepository.findSuperUserByUsername(username).isPresent()) {
+            throw new UserAlreadyRegisteredException("User already exists");
+        }
+        superUserRepository.save(new SuperUser(username, passwordEncoder.encode(password)));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+    }
 }

