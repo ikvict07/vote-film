@@ -1,4 +1,4 @@
-package org.fiit.votefilm.service;
+package org.fiit.votefilm.service.filmApi;
 
 import org.fiit.votefilm.dto.MovieResultTMDB;
 import org.fiit.votefilm.dto.OMDBResponse;

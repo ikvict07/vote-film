@@ -6,6 +6,8 @@ import org.fiit.votefilm.exceptions.InvalidSessionIdException;
 import org.fiit.votefilm.exceptions.NotEnoughPoints;
 import org.fiit.votefilm.model.*;
 import org.fiit.votefilm.repository.*;
+import org.fiit.votefilm.service.filmApi.FilmFactory;
+import org.fiit.votefilm.service.filmApi.FindFilmService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;

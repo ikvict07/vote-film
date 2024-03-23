@@ -1,4 +1,4 @@
-package org.fiit.votefilm.service;
+package org.fiit.votefilm.service.filmApi;
 
 import org.fiit.votefilm.dto.OMDBResponse;
 import org.fiit.votefilm.dto.TMDBResponse;
@@ -28,7 +28,7 @@ public class FindFilmService {
         Runnable omdb = () -> {
             try {
                 if (!filmFound.get()) {
-                    ResponseEntity<?> response = finderOMDB.sendRequest(title);
+                    ResponseEntity<?> response = finderOMDB.findFilm(title);
                     omdbResponse.set(response);
                     filmFound.set(true);
                 }
@@ -39,7 +39,7 @@ public class FindFilmService {
         Runnable tmdb = () -> {
             try {
                 if (!filmFound.get()) {
-                    ResponseEntity<?> response = finderTMDB.sendRequest(title);
+                    ResponseEntity<?> response = finderTMDB.findFilm(title);
                     tmdbResponse.set(response);
                     filmFound.set(true);
                 }

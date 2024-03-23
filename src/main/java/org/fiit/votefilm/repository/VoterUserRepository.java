@@ -26,6 +26,8 @@ public interface VoterUserRepository extends JpaRepository<VoterUser, Long> {
      * @return True if a voter user with the given username exists, false otherwise.
      */
 
-    Boolean existsByUsername(String username);
+    default Boolean existsByUsername(String username) {
+        return findByUsername(username).isPresent();
+    } // Bad code only for project conditions - default method in interface
 
 }

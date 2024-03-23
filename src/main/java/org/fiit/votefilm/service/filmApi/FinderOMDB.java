@@ -1,4 +1,4 @@
-package org.fiit.votefilm.service;
+package org.fiit.votefilm.service.filmApi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
@@ -17,19 +17,13 @@ public class FinderOMDB implements FilmFinder {
     @Value("${api.omdb.key}")
     private String apiKey;
 
+    private final OMDBResponseHandler omdbResponseHandler;
+
     public FinderOMDB(ObjectMapper mapper) {
         this.mapper = mapper;
+        omdbResponseHandler = new OMDBResponseHandler();
     }
 
-    @Override
-    public ResponseEntity<?> findFilm(String title) {
-        try {
-            return sendRequest(title);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("Internal server error");
-        }
-    }
 
     private String prepareTitle(String title) {
         return title.replaceAll(" ", "+");
@@ -39,7 +33,8 @@ public class FinderOMDB implements FilmFinder {
         return "http://www.omdbapi.com/?apikey=" + apiKey + "&t=" + prepareTitle(title);
     }
 
-    public ResponseEntity<?> sendRequest(String title) throws IOException {
+    @Override
+    public ResponseEntity<?> findFilm(String title) throws IOException {
         String url = prepareUrl(title);
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -49,10 +44,7 @@ public class FinderOMDB implements FilmFinder {
         try (Response response = client.newCall(request).execute()) {
             String responseBody = response.body().string();
             OMDBResponse movieResponse = mapper.readValue(responseBody, OMDBResponse.class);
-            if ("False".equals(movieResponse.getResponse())) {
-                return ResponseEntity.status(404).body("Film not found");
-            }
-            return ResponseEntity.ok(movieResponse);
+            return omdbResponseHandler.handleResponse(movieResponse);
         }
     }
 }

@@ -1,4 +1,4 @@
-package org.fiit.votefilm.service;
+package org.fiit.votefilm.service.filmApi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
@@ -19,8 +19,10 @@ public class FinderTMDB implements FilmFinder {
     private String apiKey;
 
 
+    private final TMDBResponseHandler tmdbResponseHandler;
     public FinderTMDB(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
+        this.tmdbResponseHandler = new TMDBResponseHandler();
     }
 
     @PostConstruct
@@ -28,15 +30,6 @@ public class FinderTMDB implements FilmFinder {
         System.out.println("API Key: " + apiKey);
     }
 
-    @Override
-    public ResponseEntity<?> findFilm(String title) {
-        try {
-            return sendRequest(title);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("Internal server error");
-        }
-    }
 
     private String prepareTitle(String title) {
         return title.replaceAll(" ", "+");
@@ -50,7 +43,8 @@ public class FinderTMDB implements FilmFinder {
                 + "&region=US";
     }
 
-    public ResponseEntity<?> sendRequest(String title) throws IOException {
+    @Override
+    public ResponseEntity<?> findFilm(String title) throws IOException {
         String url = prepareUrl(title);
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -63,10 +57,7 @@ public class FinderTMDB implements FilmFinder {
         try (Response response = client.newCall(request).execute()) {
             String responseBody = response.body().string();
             TMDBResponse tmdbResponse = objectMapper.readValue(responseBody, TMDBResponse.class);
-            if (tmdbResponse.getTotalResults() == 0) {
-                return ResponseEntity.status(404).body("Film not found");
-            }
-            return ResponseEntity.ok(tmdbResponse);
+            return tmdbResponseHandler.handleResponse(tmdbResponse);
         }
     }
 }
