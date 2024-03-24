@@ -54,7 +54,7 @@ public class AdminController {
     @PostMapping("/add-super-user/")
     public String addSuperUser(HttpServletRequest request, @RequestParam String username, @RequestParam String password) throws UserAlreadyRegisteredException {
         try {
-            authenticationService.addSuperUser(username, password);
+            authenticationService.addVotingHost(username, password);
         } catch (AccessNotAllowed e) {
             return "redirect:/";
         }
@@ -106,8 +106,15 @@ public class AdminController {
         return "admin-users";
     }
 
-    @GetMapping("/create-super-user/")
-    public void createSuperUser() throws UserAlreadyRegisteredException {
-        authenticationService.addSuperWithoutPermission("admin2", "admin");
+    @GetMapping("/create-admin-user/")
+    public void createAdminUser() throws UserAlreadyRegisteredException {
+        System.out.println("Creating admin user");
+        authenticationService.addAdminWithoutPermission("admin", "admin");
+    }
+
+    @GetMapping("/create-host-user/")
+    public void createVotingHost() throws UserAlreadyRegisteredException {
+        System.out.println("Creating host user");
+        authenticationService.addHostWithoutPermission("host", "host");
     }
 }

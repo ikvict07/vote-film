@@ -17,5 +17,4 @@ public class VoteFilmApplication {
     public CommandLineRunner commandLineRunner(DatabaseInitializer databaseInitializer) {
         return args -> databaseInitializer.init();
     }
-
 }

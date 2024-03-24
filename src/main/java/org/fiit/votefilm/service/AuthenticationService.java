@@ -2,10 +2,12 @@ package org.fiit.votefilm.service;
 
 import org.fiit.votefilm.enums.Role;
 import org.fiit.votefilm.exceptions.*;
-import org.fiit.votefilm.model.SuperUser;
-import org.fiit.votefilm.model.VoterUser;
-import org.fiit.votefilm.repository.SuperUserRepository;
-import org.fiit.votefilm.repository.VoterUserRepository;
+import org.fiit.votefilm.model.users.Admin;
+import org.fiit.votefilm.model.users.VoterUser;
+import org.fiit.votefilm.model.users.VotingHost;
+import org.fiit.votefilm.repository.AdminRepository;
+import org.fiit.votefilm.repository.UserRepository;
+import org.fiit.votefilm.repository.VotingHostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,19 +27,20 @@ import java.util.Collection;
 public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
-    private final VoterUserRepository userRepository;
+    private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
 
-    private final SuperUserRepository superUserRepository;
-
+    private final VotingHostRepository votingHostRepository;
+    private final AdminRepository adminRepository;
 
     @Autowired
-    public AuthenticationService(AuthenticationManager authenticationManager, VoterUserRepository userRepository, PasswordEncoder passwordEncoder, SuperUserRepository superUserRepository) {
+    public AuthenticationService(AuthenticationManager authenticationManager, UserRepository userRepository, PasswordEncoder passwordEncoder, VotingHostRepository superUserRepository, AdminRepository adminRepository) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.superUserRepository = superUserRepository;
+        this.votingHostRepository = superUserRepository;
+        this.adminRepository = adminRepository;
     }
 
     /**
@@ -93,7 +96,7 @@ public class AuthenticationService {
      * @throws UserAlreadyRegisteredException If the super user is already registered.
      * @throws AccessNotAllowed               If the user is not allowed to add a super user.
      */
-    public void addSuperUser(String username, String password) throws UserAlreadyRegisteredException, AccessNotAllowed {
+    public void addVotingHost(String username, String password) throws UserAlreadyRegisteredException, AccessNotAllowed {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         boolean isVotingHost = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
@@ -103,18 +106,26 @@ public class AuthenticationService {
             throw new AccessNotAllowed("You are not allowed to add points");
         }
 
-        if (superUserRepository.findSuperUserByUsername(username).isPresent()) {
+        if (votingHostRepository.findVotingHostByUsername(username).isPresent()) {
             throw new UserAlreadyRegisteredException("User already exists");
         }
-        superUserRepository.save(new SuperUser(username, passwordEncoder.encode(password)));
+        votingHostRepository.save(new VotingHost(username, passwordEncoder.encode(password)));
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
     }
 
-    public void addSuperWithoutPermission(String username, String password) throws UserAlreadyRegisteredException {
-        if (superUserRepository.findSuperUserByUsername(username).isPresent()) {
+    public void addAdminWithoutPermission(String username, String password) throws UserAlreadyRegisteredException {
+        if (adminRepository.findAdminByUsername(username).isPresent()) {
             throw new UserAlreadyRegisteredException("User already exists");
         }
-        superUserRepository.save(new SuperUser(username, passwordEncoder.encode(password)));
+        adminRepository.save(new Admin(username, passwordEncoder.encode(password)));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+    }
+
+    public void addHostWithoutPermission(String username, String password) throws UserAlreadyRegisteredException {
+        if (votingHostRepository.findVotingHostByUsername(username).isPresent()) {
+            throw new UserAlreadyRegisteredException("User already exists");
+        }
+        votingHostRepository.save(new VotingHost(username, passwordEncoder.encode(password)));
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
     }
 }

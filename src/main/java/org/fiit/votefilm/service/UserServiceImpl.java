@@ -1,7 +1,7 @@
 package org.fiit.votefilm.service;
 
-import org.fiit.votefilm.model.VoterUser;
-import org.fiit.votefilm.repository.VoterUserRepository;
+import org.fiit.votefilm.model.users.AbstractUser;
+import org.fiit.votefilm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,16 +18,16 @@ import java.util.Collection;
  */
 @Service
 public class UserServiceImpl implements UserDetailsService {
-    private VoterUserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private void setUserRepository(VoterUserRepository userRepository) {
+    private void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        VoterUser user = userRepository.findByUsername(username).orElseThrow(
+        AbstractUser user = userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("No user exists with this username")
         );
         GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().name());
@@ -35,6 +35,6 @@ public class UserServiceImpl implements UserDetailsService {
         // Create a collection of authorities
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(authority);
-        return new UserDetailsImpl(user.getUsername(), user.getPassword(), authorities, user.getPoints());
+        return new UserDetailsImpl(user.getUsername(), user.getPassword(), authorities);
     }
 }

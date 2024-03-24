@@ -92,8 +92,9 @@ public class SecurityConfig {
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()
                                 .requestMatchers("/voting-setup/**").hasAuthority("VOTING_HOST")
-                                .requestMatchers("/admin/create-super-user/").permitAll() // TODO:THIS IS FOR TESTING ONLY
-                                .requestMatchers("/admin/**").hasAuthority("VOTING_HOST")
+                                .requestMatchers("/admin/create-admin-user/").permitAll() // TODO:THIS IS FOR TESTING ONLY
+                                .requestMatchers("/admin/create-host-user/").permitAll() // TODO:THIS IS FOR TESTING ONLY
+                                .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()
                 );
 
