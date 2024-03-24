@@ -1,6 +1,6 @@
-package org.fiit.votefilm.repository;
+package org.fiit.votefilm.repository.apiFilm;
 
-import org.fiit.votefilm.model.OMDBFilm;
+import org.fiit.votefilm.model.apiFilm.OMDBFilm;
 import org.springframework.stereotype.Repository;
 
 @Repository

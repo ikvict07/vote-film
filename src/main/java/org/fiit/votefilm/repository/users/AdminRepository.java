@@ -1,4 +1,4 @@
-package org.fiit.votefilm.repository;
+package org.fiit.votefilm.repository.users;
 
 import org.fiit.votefilm.model.users.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;

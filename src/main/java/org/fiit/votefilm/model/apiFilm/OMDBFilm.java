@@ -1,12 +1,14 @@
-package org.fiit.votefilm.model;
+package org.fiit.votefilm.model.apiFilm;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Entity
 @Data
-public class OMDBFilm extends AbstractFilm {
+public class OMDBFilm extends AbstractFilm implements Serializable {
     @Column(name = "year", nullable = true)
     private String year;
 

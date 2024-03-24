@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.fiit.votefilm.exceptions.AccessNotAllowed;
 import org.fiit.votefilm.exceptions.AuthenticationFailedException;
 import org.fiit.votefilm.exceptions.UserAlreadyRegisteredException;
-import org.fiit.votefilm.repository.VoterUserRepository;
+import org.fiit.votefilm.repository.users.VoterUserRepository;
 import org.fiit.votefilm.service.AuthenticationService;
 import org.fiit.votefilm.service.PointsService;
 import org.springframework.beans.factory.annotation.Autowired;

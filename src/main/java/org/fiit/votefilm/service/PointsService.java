@@ -4,7 +4,7 @@ import org.fiit.votefilm.enums.Role;
 import org.fiit.votefilm.exceptions.AccessNotAllowed;
 import org.fiit.votefilm.exceptions.AuthenticationFailedException;
 import org.fiit.votefilm.model.users.VoterUser;
-import org.fiit.votefilm.repository.VoterUserRepository;
+import org.fiit.votefilm.repository.users.VoterUserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

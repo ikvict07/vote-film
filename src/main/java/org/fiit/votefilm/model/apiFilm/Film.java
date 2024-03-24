@@ -1,4 +1,4 @@
-package org.fiit.votefilm.model;
+package org.fiit.votefilm.model.apiFilm;
 
 public interface Film {
     Long getId();

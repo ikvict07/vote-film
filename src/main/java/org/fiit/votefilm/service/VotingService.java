@@ -3,8 +3,8 @@ package org.fiit.votefilm.service;
 import org.fiit.votefilm.exceptions.AuthenticationFailedException;
 import org.fiit.votefilm.model.VotingSession;
 import org.fiit.votefilm.model.users.VotingHost;
-import org.fiit.votefilm.repository.VotingHostRepository;
 import org.fiit.votefilm.repository.VotingSessionRepository;
+import org.fiit.votefilm.repository.users.VotingHostRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 

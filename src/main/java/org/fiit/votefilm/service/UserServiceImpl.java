@@ -1,7 +1,7 @@
 package org.fiit.votefilm.service;
 
 import org.fiit.votefilm.model.users.AbstractUser;
-import org.fiit.votefilm.repository.UserRepository;
+import org.fiit.votefilm.repository.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
