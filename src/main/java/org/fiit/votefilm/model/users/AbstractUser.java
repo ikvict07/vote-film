@@ -1,11 +1,12 @@
-package org.fiit.votefilm.model;
+package org.fiit.votefilm.model.users;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.fiit.votefilm.enums.Role;
 
 @Entity
 @Data
-public class VoterUser {
+public abstract class AbstractUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -13,12 +14,7 @@ public class VoterUser {
 
     private String username;
     private String password;
-    private Long points;
 
-    public VoterUser() {
-    }
-    public VoterUser(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

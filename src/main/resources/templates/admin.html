@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+    <div th:include="common.html :: commonHead"></div>
+    <style>
+        .center-button {
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body class="sub_page">
+<div class="hero_area">
+    <header th:insert="~{common :: header}"></header>
+    <section class="info_section layout_padding">
+        <div class="container layout_padding">
+            <div class="heading_container heading_center">
+                <h2>Admin panel</h2>
+            </div>
+            <div class="button-container">
+                <button type="button" class="btn btn-2 text-center text-danger align-content-center center-button"
+                        onclick="location.href='/admin/users/'">Users
+                </button>
+                <button type="button" class="btn btn-2 text-center text-danger align-content-center center-button"
+                        onclick="location.href='/admin/add-super-user/'">Add Voting Host
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+
+</div>
+</body>
+</html>

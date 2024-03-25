@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:include="common.html :: commonHead"></div>
+    <script>
+        window.onload = function () {
+            const canvas = document.getElementById('rouletteWheel');
+            if (!canvas.getContext) {
+                alert('Canvas не поддерживается вашим браузером. Пожалуйста, используйте современный браузер.');
+                return;
+            }
+            const ctx = canvas.getContext('2d');
+            const radius = canvas.width / 2;
+            ctx.translate(radius, radius); // Перемещаем начало координат в центр канваса
+
+            const votingItems = Array.from(document.querySelectorAll('#votingItemsContainer > div')).map(el => ({
+                title: el.getAttribute('data-title'),
+                votes: parseInt(el.getAttribute('data-votes'), 10)
+            }));
+            const totalVotes = votingItems.reduce((acc, item) => acc + item.votes, 0);
+
+            // Вычисляем проценты для каждого элемента голосования
+            votingItems.forEach(item => {
+                item.percentage = (item.votes / totalVotes) * 100;
+            });
+
+            // Рисуем рулетку и маркер
+            drawRoulette(0);
+            drawMarker();
+
+            document.getElementById('spinRoulette').addEventListener('click', spinRoulette);
+
+            function drawRoulette(angle) {
+                ctx.clearRect(-radius * 2, -radius * 2, canvas.width, canvas.height); // Очищаем канвас
+                let startAngle = angle;
+
+                votingItems.forEach((item, index) => {
+                    const sliceAngle = (item.votes / totalVotes) * 2 * Math.PI;
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.arc(0, 0, radius, startAngle, startAngle + sliceAngle);
+                    ctx.fillStyle = `hsl(${index * 500 / votingItems.length}, 100%, 50%)`;
+                    ctx.fill();
+
+                    // Текст
+                    const textRadius = radius * 0.60;
+                    const textAngle = startAngle + sliceAngle / 2;
+                    ctx.save();
+                    ctx.rotate(textAngle);
+                    ctx.textAlign = "center";
+                    ctx.fillStyle = "#000000";
+                    ctx.font = "16px Arial";
+                    ctx.fillText(item.title, textRadius, 0);
+                    ctx.restore();
+
+                    startAngle += sliceAngle;
+                });
+
+                drawMarker(); // Перерисовываем маркер после рулетки
+            }
+
+            function drawMarker() {
+                // Рисуем обводку
+                ctx.strokeStyle = 'black'; // Цвет обводки
+                ctx.lineWidth = 4; // Толщина обводки
+                ctx.beginPath();
+                ctx.moveTo(radius - 10, -10);
+                ctx.lineTo(radius, 0);
+                ctx.lineTo(radius - 10, 10);
+                ctx.closePath(); // Закрываем путь
+                ctx.stroke(); // Рисуем обводку
+
+                // Рисуем заливку
+                ctx.fillStyle = 'red'; // Цвет заливки
+                ctx.beginPath();
+                ctx.moveTo(radius - 10, -10);
+                ctx.lineTo(radius, 0);
+                ctx.lineTo(radius - 10, 10);
+                ctx.closePath(); // Закрываем путь
+                ctx.fill(); // Рисуем заливку
+            }
+
+            function spinRoulette() {
+                let spinDegrees = Math.random() * 360 + 1800; // Минимум 10 полных оборотов
+                let currentAngle = 0;
+                let spinTime = 0;
+                const spinTimeTotal = Math.random() * 3000 + 7000;
+
+                function rotateWheel() {
+                    spinTime += 30;
+                    if (spinTime >= spinTimeTotal) {
+                        stopRotateWheel();
+                        return;
+                    }
+                    const spinEase = spinTime / spinTimeTotal;
+                    currentAngle = spinDegrees * spinEase;
+                    drawRoulette(currentAngle * Math.PI / 180);
+                    requestAnimationFrame(rotateWheel);
+                }
+
+                function stopRotateWheel() {
+                    const finalAngle = currentAngle % 360;
+                    const winningIndex = findWinner(finalAngle);
+                    const winner = votingItems[winningIndex];
+                    document.getElementById('rouletteResult').textContent = `Winner: ${winner.title}`;
+                }
+
+                rotateWheel();
+            }
+
+            function findWinner(finalAngle) {
+                let adjustedFinalAngle = finalAngle % 360; // Убедимся, что угол находится в пределах 0-360
+                adjustedFinalAngle = (360 - adjustedFinalAngle) * Math.PI / 180; // Конвертируем в радианы и адаптируем к нашей системе координат
+
+                let cumulativeAngle = 0;
+                for (let i = 0; i < votingItems.length; i++) {
+                    const item = votingItems[i];
+                    const sliceAngle = (item.votes / totalVotes) * 2 * Math.PI;
+                    cumulativeAngle += sliceAngle;
+                    if (adjustedFinalAngle <= cumulativeAngle) {
+                        return i; // Возвращаем индекс победителя
+                    }
+                }
+                return 0; // Возврат индекса первого элемента в случае ошибки
+            }
+        };
+
+
+    </script>
+    <style>
+        .centered-text {
+            text-align: center;
+            font-size: 2em; /* Увеличиваем размер шрифта */
+        }
+    </style>
+</head>
+<body class="sub_page">
+<div class="hero_area">
+    <header th:insert="~{common :: header}"></header>
+    <section class="info_section layout_padding2">
+        <div class="container">
+            <p class="centered-text">Voting Session:</p>
+            <p class="centered-text" th:text="${title}"></p>
+            <p class="centered-text" th:text="${sessionId}"></p>
+        </div>
+    </section>
+    <section class="info_section layout_padding2">
+        <div id="votingItemsContainer" style="display:none;">
+            <div th:each="item : ${votingItems}"
+                 th:data-title="${item.title}"
+                 th:data-votes="${item.votes}">
+            </div>
+        </div>
+        <div class="roulette-container">
+            <canvas id="rouletteWheel" width="500" height="500"></canvas>
+            <button id="spinRoulette" class="btn">Spin the Roulette</button>
+            <p id="rouletteResult"></p>
+        </div>
+    </section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+    <section class="info_section layout_padding2"></section>
+    <footer th:insert="~{common :: footer}"></footer>
+</div>
+
+</body>
+</html>
