@@ -1,4 +1,4 @@
-package org.fiit.votefilm.service.filmApi;
+package org.fiit.votefilm.service.apiFilm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;

@@ -2,12 +2,12 @@ package org.fiit.votefilm.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.fiit.votefilm.exceptions.InvalidSessionIdException;
-import org.fiit.votefilm.model.Film;
-import org.fiit.votefilm.model.OMDBFilm;
-import org.fiit.votefilm.model.TMDBFilm;
 import org.fiit.votefilm.model.VotingItem;
+import org.fiit.votefilm.model.apiFilm.Film;
+import org.fiit.votefilm.model.apiFilm.OMDBFilm;
+import org.fiit.votefilm.model.apiFilm.TMDBFilm;
 import org.fiit.votefilm.service.VotingLogic;
-import org.fiit.votefilm.service.filmApi.FilmFactory;
+import org.fiit.votefilm.service.apiFilm.FilmFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

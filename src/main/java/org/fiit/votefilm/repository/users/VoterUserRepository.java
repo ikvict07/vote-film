@@ -1,6 +1,6 @@
-package org.fiit.votefilm.repository;
+package org.fiit.votefilm.repository.users;
 
-import org.fiit.votefilm.model.VoterUser;
+import org.fiit.votefilm.model.users.VoterUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

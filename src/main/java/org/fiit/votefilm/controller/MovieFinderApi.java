@@ -1,6 +1,6 @@
 package org.fiit.votefilm.controller;
 
-import org.fiit.votefilm.service.filmApi.FindFilmService;
+import org.fiit.votefilm.service.apiFilm.FindFilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

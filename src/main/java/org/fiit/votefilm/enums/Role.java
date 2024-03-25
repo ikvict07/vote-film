@@ -10,7 +10,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Role {
     COMMON_USER("COMMON_USER"),
-    VOTING_HOST("VOTING_HOST");
+    VOTING_HOST("VOTING_HOST"),
+    ADMIN("ADMIN");
 
     private final String role;
 

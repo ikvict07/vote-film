@@ -2,6 +2,7 @@ package org.fiit.votefilm.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.fiit.votefilm.model.users.VotingHost;
 
 import java.util.List;
 import java.util.UUID;
@@ -38,14 +39,14 @@ public class VotingSession {
 
     @ManyToOne
     @JoinColumn(name = "creator_id")
-    private SuperUser creator;
+    private VotingHost creator;
 
 
     @Column(name = "is_open", nullable = false)
     private boolean isOpen;
 
 
-    public VotingSession(SuperUser creator, String title) {
+    public VotingSession(VotingHost creator, String title) {
         this.creator = creator;
         this.title = title;
         this.isOpen = true;
