@@ -1,13 +1,15 @@
-package org.fiit.votefilm.model;
+package org.fiit.votefilm.model.apiFilm;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.fiit.votefilm.model.VotingItem;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
-public abstract class AbstractFilm implements Film {
+public abstract class AbstractFilm implements Film, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -26,5 +28,6 @@ public abstract class AbstractFilm implements Film {
     private String poster;
 
     @OneToMany(mappedBy = "film")
+    @Transient
     private List<VotingItem> votingItems;
 }

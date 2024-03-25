@@ -1,4 +1,4 @@
-package org.fiit.votefilm.service.filmApi;
+package org.fiit.votefilm.service.apiFilm;
 
 import org.fiit.votefilm.dto.TMDBResponse;
 import org.springframework.http.ResponseEntity;
