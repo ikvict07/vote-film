@@ -1,9 +1,13 @@
 package org.fiit.votefilm.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.fiit.votefilm.exceptions.InvalidSessionIdException;
 import org.fiit.votefilm.model.VotingItem;
-import org.fiit.votefilm.repository.VotingItemRepository;
+import org.fiit.votefilm.model.apiFilm.Film;
+import org.fiit.votefilm.model.apiFilm.OMDBFilm;
+import org.fiit.votefilm.model.apiFilm.TMDBFilm;
 import org.fiit.votefilm.service.VotingLogic;
+import org.fiit.votefilm.service.apiFilm.FilmFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +23,16 @@ import java.util.List;
  */
 @Controller
 public class RepresentationController {
-    private final VotingItemRepository votingItemRepository;
-    private final VotingLogic votingLogic;
 
-    public RepresentationController(VotingItemRepository votingItemRepository, VotingLogic votingLogic) {
-        this.votingItemRepository = votingItemRepository;
+    private final VotingLogic votingLogic;
+    private final FilmFactory filmFactory;
+
+
+    public RepresentationController(VotingLogic votingLogic, FilmFactory filmFactory) {
+
         this.votingLogic = votingLogic;
+
+        this.filmFactory = filmFactory;
     }
 
     /**
@@ -35,19 +43,6 @@ public class RepresentationController {
     @GetMapping("/")
     public String index() {
         return "redirect:/voting/enter/";
-    }
-
-    /**
-     * Handles GET requests to the voting page.
-     *
-     * @param model the Model object
-     * @return the voting view
-     */
-    @GetMapping("/voting/")
-    public String votingList(Model model) {
-        model.addAttribute("votingItems", votingItemRepository.findAll());
-        model.addAttribute("votes", votingItemRepository.findAll().stream().map(VotingItem::getVotes));
-        return "voting";
     }
 
     /**
@@ -115,6 +110,8 @@ public class RepresentationController {
             model.addAttribute("votes", votingLogic.getVotingItems(id).stream().map(VotingItem::getVotes));
             model.addAttribute("sessionId", id);
             model.addAttribute("title", votingLogic.getVotingSession(id).getTitle());
+
+
         } catch (InvalidSessionIdException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return true;
@@ -122,5 +119,25 @@ public class RepresentationController {
         Long totalVotes = votingItems.stream().mapToLong(VotingItem::getVotes).sum();
         model.addAttribute("totalVotes", totalVotes);
         return false;
+    }
+
+    @GetMapping("/voting/film")
+    private String filmInfo(Model model, @RequestParam String title, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        System.out.println("TITLE IS: " + title);
+        Film film = filmFactory.getFilm(title).orElse(null);
+
+        if (film == null) {
+            redirectAttributes.addFlashAttribute("error", "Film not found in the database");
+            return "redirect:" + request.getHeader("Referer");
+        }
+        if (film instanceof OMDBFilm omdbFilm) {
+            model.addAttribute("film", omdbFilm);
+            return "film-info-omdb";
+        } else if (film instanceof TMDBFilm tmdbFilm) {
+            model.addAttribute("film", tmdbFilm);
+            return "film-info-tmdb";
+        }
+        redirectAttributes.addFlashAttribute("error", "Film not found in the database");
+        return "redirect:" + request.getHeader("Referer");
     }
 }

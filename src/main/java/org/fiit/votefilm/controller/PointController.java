@@ -70,7 +70,6 @@ public class PointController {
 
     @GetMapping("/get/")
     public ResponseEntity<?> getUserPoints() {
-        System.out.println("HERE");
         try {
             Long points = pointsService.getPoints(SecurityContextHolder.getContext().getAuthentication().getName());
             return ResponseEntity.ok(points);

@@ -32,16 +32,16 @@
     <script>
         function updatePoints() {
             $.ajax({
-                url: '/points/get/', // URL вашего API, который возвращает количество очков пользователя
+                url: '/points/get/',
                 type: 'GET',
                 success: function (data) {
-                    // Обновляем текст элемента с очками
+
                     $('.points').text(data);
                 }
             });
         }
 
-        // Вызываем функцию updatePoints каждые 5 секунд
+
         setInterval(updatePoints, 5000);
     </script>
 </head>
@@ -68,7 +68,7 @@
                     <li class="nav-item" th:if="${#authorization.expression('hasAuthority(''VOTING_HOST'')')}">
                         <a class="nav-link" href="/voting-setup/start/">Start Voting</a>
                     </li>
-                    <li class="nav-item" th:if="${#authorization.expression('hasAuthority(''VOTING_HOST'')')}">
+                    <li class="nav-item" th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
                         <a class="nav-link" href="/admin/">Admin Panel</a>
                     </li>
                     <li class="nav-item" th:if="${#authorization.expression('isAnonymous()')}">

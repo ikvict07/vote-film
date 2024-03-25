@@ -2,7 +2,6 @@ package org.fiit.votefilm.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,8 +16,6 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-    @Setter
-    private Long points;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

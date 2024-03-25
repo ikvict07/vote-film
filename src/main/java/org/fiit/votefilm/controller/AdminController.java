@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.fiit.votefilm.exceptions.AccessNotAllowed;
 import org.fiit.votefilm.exceptions.AuthenticationFailedException;
 import org.fiit.votefilm.exceptions.UserAlreadyRegisteredException;
-import org.fiit.votefilm.repository.VoterUserRepository;
+import org.fiit.votefilm.repository.users.VoterUserRepository;
 import org.fiit.votefilm.service.AuthenticationService;
 import org.fiit.votefilm.service.PointsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class AdminController {
     @PostMapping("/add-super-user/")
     public String addSuperUser(HttpServletRequest request, @RequestParam String username, @RequestParam String password) throws UserAlreadyRegisteredException {
         try {
-            authenticationService.addSuperUser(username, password);
+            authenticationService.addVotingHost(username, password);
         } catch (AccessNotAllowed e) {
             return "redirect:/";
         }
@@ -104,5 +104,17 @@ public class AdminController {
     public String getUsers(Model model) {
         model.addAttribute("users", userRepository.findAll());
         return "admin-users";
+    }
+
+    @GetMapping("/create-admin-user/")
+    public void createAdminUser() throws UserAlreadyRegisteredException {
+        System.out.println("Creating admin user");
+        authenticationService.addAdminWithoutPermission("admin", "admin");
+    }
+
+    @GetMapping("/create-host-user/")
+    public void createVotingHost() throws UserAlreadyRegisteredException {
+        System.out.println("Creating host user");
+        authenticationService.addHostWithoutPermission("host", "host");
     }
 }

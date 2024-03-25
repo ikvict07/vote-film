@@ -1,6 +1,6 @@
-package org.fiit.votefilm.repository;
+package org.fiit.votefilm.repository.users;
 
-import org.fiit.votefilm.model.VoterUser;
+import org.fiit.votefilm.model.users.VoterUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +26,8 @@ public interface VoterUserRepository extends JpaRepository<VoterUser, Long> {
      * @return True if a voter user with the given username exists, false otherwise.
      */
 
-    Boolean existsByUsername(String username);
+    default Boolean existsByUsername(String username) {
+        return findByUsername(username).isPresent();
+    } // Bad code only for project conditions - default method in interface
 
 }
