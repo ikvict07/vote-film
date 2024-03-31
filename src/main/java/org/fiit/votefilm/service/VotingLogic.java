@@ -73,7 +73,7 @@ public class VotingLogic {
         VotingItem votingItem = votingSession.getVotingItems().stream()
                 .filter(vi -> vi.getTitle().equals(title))
                 .findFirst()
-                .orElseGet(() -> createOrFindVotingItem(ApiFilmOptional, title, votingSession));
+                .orElseGet(() -> createNewVotingItem(ApiFilmOptional, title, votingSession));
 
         votingItem.setVotes(votingItem.getVotes() + votes);
         votingItemRepository.save(votingItem);
@@ -82,24 +82,13 @@ public class VotingLogic {
         voterUserRepository.save(user);
     }
 
-    private VotingItem createOrFindVotingItem(Optional<? extends Film> ApiFilmOptional, String title, VotingSession votingSession) {
-        if (ApiFilmOptional.isPresent()) {
-            Film film = ApiFilmOptional.get();
-            String filmTitle = film.getTitle();
-            return votingItemRepository.findVotingItemByTitle(filmTitle)
-                    .orElseGet(() -> createNewVotingItem(film, filmTitle, votingSession));
-        } else {
-            return createNewVotingItem(null, title, votingSession);
-        }
-    }
-
-    private VotingItem createNewVotingItem(Film film, String title, VotingSession votingSession) {
+    private VotingItem createNewVotingItem(Optional<? extends Film> film, String title, VotingSession votingSession) {
         VotingItem votingItem = new VotingItem();
         votingItem.setTitle(title);
         votingItem.setVotes(0L);
         votingItem.setVotingSession(votingSession);
-        if (film != null) {
-            votingItem.setFilm(film instanceof OMDBFilm ? omdbFilmRepository.findByTitle(title).get() : tmdbFilmRepository.findByTitle(title).get());
+        if (!film.isPresent()) {
+            votingItem.setFilm(film.get() instanceof OMDBFilm ? omdbFilmRepository.findByTitle(title).get() : tmdbFilmRepository.findByTitle(title).get()); // TODO: findByTitle can return null
         }
         return votingItemRepository.save(votingItem);
     }
