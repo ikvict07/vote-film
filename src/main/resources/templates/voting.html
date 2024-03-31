@@ -51,9 +51,21 @@
             </div>
         </div>
     </section>
-    <li class="nav-item centered-text" th:if="${#authorization.expression('hasAuthority(''VOTING_HOST'')')}">
-        <a class="nav-link" th:href="@{/voting/spin/{id}(id=${sessionId})}">Start Voting</a>
-    </li>
+    <a class="nav-item centered-text" th:if="${#authorization.expression('hasAuthority(''VOTING_HOST'')')}">
+        <a class="nav-link" th:href="@{/voting/spin/{id}(id=${sessionId})}"
+           style="background-color: #f44336;
+              border: none;
+              color: white;
+              padding: 10px 20px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 18px;
+              margin: 0 auto;
+              max-width: 200px;
+              cursor: pointer;
+              border-radius: 12px;">Start Voting</a>
+    </a>
 
     <section class="info_section layout_padding2">
         <div class="container">

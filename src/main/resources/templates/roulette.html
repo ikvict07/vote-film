@@ -13,7 +13,7 @@
             }
             const ctx = canvas.getContext('2d');
             const radius = canvas.width / 2;
-            ctx.translate(radius, radius); // Перемещаем начало координат в центр канваса
+            ctx.translate(radius, radius);
 
             const votingItems = Array.from(document.querySelectorAll('#votingItemsContainer > div')).map(el => ({
                 title: el.getAttribute('data-title'),
@@ -21,19 +21,19 @@
             }));
             const totalVotes = votingItems.reduce((acc, item) => acc + item.votes, 0);
 
-            // Вычисляем проценты для каждого элемента голосования
+
             votingItems.forEach(item => {
                 item.percentage = (item.votes / totalVotes) * 100;
             });
 
-            // Рисуем рулетку и маркер
+
             drawRoulette(0);
             drawMarker();
 
             document.getElementById('spinRoulette').addEventListener('click', spinRoulette);
 
             function drawRoulette(angle) {
-                ctx.clearRect(-radius * 2, -radius * 2, canvas.width, canvas.height); // Очищаем канвас
+                ctx.clearRect(-radius * 2, -radius * 2, canvas.width, canvas.height);
                 let startAngle = angle;
 
                 votingItems.forEach((item, index) => {
@@ -58,28 +58,28 @@
                     startAngle += sliceAngle;
                 });
 
-                drawMarker(); // Перерисовываем маркер после рулетки
+                drawMarker();
             }
 
             function drawMarker() {
                 // Рисуем обводку
-                ctx.strokeStyle = 'black'; // Цвет обводки
-                ctx.lineWidth = 4; // Толщина обводки
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 4;
                 ctx.beginPath();
                 ctx.moveTo(radius - 10, -10);
                 ctx.lineTo(radius, 0);
                 ctx.lineTo(radius - 10, 10);
-                ctx.closePath(); // Закрываем путь
-                ctx.stroke(); // Рисуем обводку
+                ctx.closePath();
+                ctx.stroke();
 
                 // Рисуем заливку
-                ctx.fillStyle = 'red'; // Цвет заливки
+                ctx.fillStyle = 'red';
                 ctx.beginPath();
                 ctx.moveTo(radius - 10, -10);
                 ctx.lineTo(radius, 0);
                 ctx.lineTo(radius - 10, 10);
-                ctx.closePath(); // Закрываем путь
-                ctx.fill(); // Рисуем заливку
+                ctx.closePath();
+                ctx.fill();
             }
 
             function spinRoulette() {
@@ -105,14 +105,20 @@
                     const winningIndex = findWinner(finalAngle);
                     const winner = votingItems[winningIndex];
                     document.getElementById('rouletteResult').textContent = `Winner: ${winner.title}`;
+
+                    // Set the winner's title in the hidden input field
+                    document.getElementById('winnerTitle').value = winner.title;
+
+                    // Show the form
+                    document.getElementById('winnerForm').style.display = 'flex';
                 }
 
                 rotateWheel();
             }
 
             function findWinner(finalAngle) {
-                let adjustedFinalAngle = finalAngle % 360; // Убедимся, что угол находится в пределах 0-360
-                adjustedFinalAngle = (360 - adjustedFinalAngle) * Math.PI / 180; // Конвертируем в радианы и адаптируем к нашей системе координат
+                let adjustedFinalAngle = finalAngle % 360;
+                adjustedFinalAngle = (360 - adjustedFinalAngle) * Math.PI / 180;
 
                 let cumulativeAngle = 0;
                 for (let i = 0; i < votingItems.length; i++) {
@@ -120,10 +126,10 @@
                     const sliceAngle = (item.votes / totalVotes) * 2 * Math.PI;
                     cumulativeAngle += sliceAngle;
                     if (adjustedFinalAngle <= cumulativeAngle) {
-                        return i; // Возвращаем индекс победителя
+                        return i;
                     }
                 }
-                return 0; // Возврат индекса первого элемента в случае ошибки
+                return 0;
             }
         };
 
@@ -132,7 +138,7 @@
     <style>
         .centered-text {
             text-align: center;
-            font-size: 2em; /* Увеличиваем размер шрифта */
+            font-size: 2em;
         }
     </style>
 </head>
@@ -157,6 +163,23 @@
             <canvas id="rouletteWheel" width="500" height="500"></canvas>
             <button id="spinRoulette" class="btn">Spin the Roulette</button>
             <p id="rouletteResult"></p>
+            <form id="winnerForm" th:action="@{/voting/film}" method="get"
+                  style="display: none; align-items: center; vertical-align: top">
+                <input id="winnerTitle" type="hidden" name="title">
+                <button type="submit" class="centered-text" style="background-color: #f44336; /* Red */
+                                        border: none;
+                                        color: white;
+                                        padding: 5px 10px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;
+                                        font-size: 12px;
+                                        margin: 4px 2px;
+                                        cursor: pointer;
+                                        vertical-align: top;
+                                        border-radius: 12px;">Info
+                </button>
+            </form>
         </div>
     </section>
     <section class="info_section layout_padding2"></section>

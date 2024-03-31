@@ -107,14 +107,16 @@ public class AdminController {
     }
 
     @GetMapping("/create-admin-user/")
-    public void createAdminUser() throws UserAlreadyRegisteredException {
+    public String createAdminUser() throws UserAlreadyRegisteredException {
         System.out.println("Creating admin user");
         authenticationService.addAdminWithoutPermission("admin", "admin");
+        return "redirect:/auth/login/";
     }
 
     @GetMapping("/create-host-user/")
-    public void createVotingHost() throws UserAlreadyRegisteredException {
+    public String createVotingHost() throws UserAlreadyRegisteredException {
         System.out.println("Creating host user");
         authenticationService.addHostWithoutPermission("host", "host");
+        return "redirect:/auth/login/";
     }
 }
