@@ -6,8 +6,8 @@ import org.fiit.votefilm.exceptions.InvalidSessionIdException;
 import org.fiit.votefilm.exceptions.NotEnoughPoints;
 import org.fiit.votefilm.model.VotingItem;
 import org.fiit.votefilm.model.VotingSession;
+import org.fiit.votefilm.model.apiFilm.AbstractFilm;
 import org.fiit.votefilm.model.apiFilm.Film;
-import org.fiit.votefilm.model.apiFilm.OMDBFilm;
 import org.fiit.votefilm.model.users.VoterUser;
 import org.fiit.votefilm.repository.VotingItemRepository;
 import org.fiit.votefilm.repository.VotingSessionRepository;
@@ -15,7 +15,6 @@ import org.fiit.votefilm.repository.apiFilm.OMDBFilmRepository;
 import org.fiit.votefilm.repository.apiFilm.TMDBFilmRepository;
 import org.fiit.votefilm.repository.users.VoterUserRepository;
 import org.fiit.votefilm.service.apiFilm.FilmFactory;
-import org.fiit.votefilm.service.apiFilm.FindFilmService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -34,16 +33,14 @@ public class VotingLogic {
 
     private final TMDBFilmRepository tmdbFilmRepository;
     private final OMDBFilmRepository omdbFilmRepository;
-    private final FindFilmService findFilmService;
     private final FilmFactory filmFactory;
 
-    public VotingLogic(VotingItemRepository votingItemRepository, VotingSessionRepository votingSessionRepository, VoterUserRepository voterUserRepository, TMDBFilmRepository tmdbFilmRepository, OMDBFilmRepository omdbFilmRepository, FindFilmService findFilmService, FilmFactory filmFactory) {
+    public VotingLogic(VotingItemRepository votingItemRepository, VotingSessionRepository votingSessionRepository, VoterUserRepository voterUserRepository, TMDBFilmRepository tmdbFilmRepository, OMDBFilmRepository omdbFilmRepository, FilmFactory filmFactory) {
         this.votingItemRepository = votingItemRepository;
         this.votingSessionRepository = votingSessionRepository;
         this.voterUserRepository = voterUserRepository;
         this.tmdbFilmRepository = tmdbFilmRepository;
         this.omdbFilmRepository = omdbFilmRepository;
-        this.findFilmService = findFilmService;
         this.filmFactory = filmFactory;
     }
 
@@ -87,8 +84,19 @@ public class VotingLogic {
         votingItem.setTitle(title);
         votingItem.setVotes(0L);
         votingItem.setVotingSession(votingSession);
-        if (!film.isPresent()) {
-            votingItem.setFilm(film.get() instanceof OMDBFilm ? omdbFilmRepository.findByTitle(title).get() : tmdbFilmRepository.findByTitle(title).get()); // TODO: findByTitle can return null
+        if (film.isEmpty()) {
+            Optional<? extends AbstractFilm> omdbFilm = omdbFilmRepository.findByTitle(title);
+            if (omdbFilm.isPresent()) {
+                votingItem.setFilm(omdbFilm.get());
+            } else {
+                Optional<? extends AbstractFilm> tmdbFilm = tmdbFilmRepository.findByTitle(title);
+                if (tmdbFilm.isPresent()) {
+                    votingItem.setFilm(tmdbFilm.get());
+                } else {
+                    votingItem.setFilm(null);
+                }
+            }
+
         }
         return votingItemRepository.save(votingItem);
     }
