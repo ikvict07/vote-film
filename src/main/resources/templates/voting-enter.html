@@ -19,14 +19,21 @@
     <section class="info_section layout_padding2"></section>
     <section class="info_section layout_padding">
         <div class="container">
-            <h1>Enter unique code here</h1>
-            <form th:action="@{/voting/enter/}" method="post">
-                <label>
-                    <input type="text" name="sessionId" value="" placeholder="Enter code">
-                </label>
+            <div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
+                <form th:action="@{/admin/}" method="get">
+                    <button type="submit" id="fd">Admin Panel</button>
+                </form>
+            </div>
+            <div th:unless="${#authorization.expression('hasAuthority(''ADMIN'')')}">
+                <h1>Enter unique code here</h1>
+                <form th:action="@{/voting/enter/}" method="post">
+                    <label>
+                        <input type="text" name="sessionId" value="" placeholder="Enter code">
+                    </label>
 
-                <button type="submit" id="enter">Enter</button>
-            </form>
+                    <button type="submit" id="enter">Enter</button>
+                </form>
+            </div>
         </div>
     </section>
 

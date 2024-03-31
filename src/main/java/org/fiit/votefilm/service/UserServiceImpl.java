@@ -31,10 +31,14 @@ public class UserServiceImpl implements UserDetailsService {
                 () -> new UsernameNotFoundException("No user exists with this username")
         );
         GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().name());
-
-        // Create a collection of authorities
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(authority);
+        switch (user.getRole()) {
+            case VOTING_HOST -> {
+                authorities.add(new SimpleGrantedAuthority("COMMON_USER"));
+            }
+        }
+
         return new UserDetailsImpl(user.getUsername(), user.getPassword(), authorities);
     }
 }
