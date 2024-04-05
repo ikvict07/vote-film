@@ -51,9 +51,9 @@ available (they will not be protected by authentication).
   - Or just double-click on the jar file
 
 - #### Use precompiled jar
-  - Download the jar from the [releases](https://github.com/ikvict07/vote-film/releases/tag/first-working-1.1)
-  - Run `java -jar vote-film-1.1.0.jar`
-  - Or just double-click on the jar file
+    - Download the jar from the [releases](https://github.com/ikvict07/vote-film/releases/tag/first-working-1.1)
+    - Run `java -jar vote-film-1.1.0.jar`
+    - Or just double-click on the jar file
 
 - #### Use Docker Repo
     - Install and run Docker
