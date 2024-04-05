@@ -109,11 +109,11 @@ public class PointsService {
     public void setPoints(String username, Long points) throws AccessNotAllowed, AuthenticationFailedException {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 
-        boolean isVotingHost = authorities.stream()
+        boolean isAdmin = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
-                .anyMatch(Role.VOTING_HOST.getRole()::equals);
+                .anyMatch(Role.ADMIN.getRole()::equals);
 
-        if (!isVotingHost) {
+        if (!isAdmin) {
             throw new AccessNotAllowed("You are not allowed to set points");
         }
 
