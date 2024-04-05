@@ -47,18 +47,18 @@ available (they will not be protected by authentication).
     - Clone the repository
     - Open the terminal and go to the project directory
     - Run `./gradlew bootJar`
-  - Run `java -jar build/libs/vote-film-1.1.0.jar`
+  - Run `java -jar build/libs/vote-film-1.2.0.jar`
   - Or just double-click on the jar file
 
 - #### Use precompiled jar
-    - Download the jar from the [releases](https://github.com/ikvict07/vote-film/releases/tag/first-working-1.1)
-    - Run `java -jar vote-film-1.1.0.jar`
+  - Download the jar from the [releases](https://github.com/ikvict07/vote-film/releases/tag/first-working-1.2)
+  - Run `java -jar vote-film-1.2.0.jar`
     - Or just double-click on the jar file
 
 - #### Use Docker Repo
     - Install and run Docker
-  - Run `docker pull ikvict/choose-film:latest`
-  - Run `docker run -p 8080:8080 ikvict/choose-film:latest`
+  - Run `docker pull ikvict/choose-film:1.2`
+  - Run `docker run -p 8080:8080 ikvict/choose-film:1.2`
 
 - #### Use Dockerfile
     - Clone the repository
