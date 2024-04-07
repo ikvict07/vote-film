@@ -32,24 +32,20 @@ public class FilmFactory {
     }
 
     public Optional<? extends AbstractFilm> getFilm(String title) {
-        // Попытка загрузить фильм из кэша
         Optional<AbstractFilm> cachedFilm = loadFilmFromCache(title);
         if (cachedFilm.isPresent()) {
             return cachedFilm;
         }
 
-        // Если фильма нет в кэше, выполняем запрос к API
         HashMap<FilmType, ResponseEntity<?>> results = findFilmService.findFilm(title);
         if (results.get(FilmType.OMDB) != null) {
             OMDBFilm omdbFilm = createFilmFromOMDBResponse((OMDBResponse) results.get(FilmType.OMDB).getBody());
             omdbFilmRepository.save(omdbFilm);
-            // Сохраняем фильм в кэше
             saveFilmToCache(omdbFilm);
             return Optional.of(omdbFilm);
         } else if (results.get(FilmType.TMDB) != null) {
             TMDBFilm tmdbFilm = createFilmFromTMDBResponse((TMDBResponse) results.get(FilmType.TMDB).getBody());
             tmdbFilmRepository.save(tmdbFilm);
-            // Сохраняем фильм в кэше
             saveFilmToCache(tmdbFilm);
             return Optional.of(tmdbFilm);
         }

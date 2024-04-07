@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class VotingService {
     private final VotingSessionRepository votingRepository;
-    private final VotingHostRepository superUserRepository;
+    private final VotingHostRepository votingHostRepository;
 
     public VotingService(VotingSessionRepository votingRepository, VotingHostRepository superUserRepository) {
         this.votingRepository = votingRepository;
-        this.superUserRepository = superUserRepository;
+        this.votingHostRepository = superUserRepository;
     }
 
     /**
@@ -29,16 +29,15 @@ public class VotingService {
      * @throws AuthenticationFailedException If the user is not found.
      */
     public VotingSession startVotingSession(String title) throws AuthenticationFailedException {
-        VotingHost superUser = superUserRepository.findVotingHostByUsername(
+        VotingHost host = votingHostRepository.findVotingHostByUsername(
                         SecurityContextHolder
                                 .getContext()
                                 .getAuthentication()
                                 .getName())
                 .orElseThrow(() -> new AuthenticationFailedException("No user exists with this username"));
 
-        VotingSession votingSession = new VotingSession(superUser, title);
+        VotingSession votingSession = new VotingSession(host, title);
         return votingRepository.save(votingSession);
     }
 
 }
-//         if (votingSession.get().getVotingItems().stream().noneMatch(votingItem -> votingItem.getTitle().equals(title))) {

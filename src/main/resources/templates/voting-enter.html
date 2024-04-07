@@ -28,7 +28,7 @@
                 <h1>Enter unique code here</h1>
                 <form th:action="@{/voting/enter/}" method="post">
                     <label>
-                        <input type="text" name="sessionId" value="" placeholder="Enter code">
+                        <input type="text" name="sessionId" value="" placeholder="Enter code" required>
                     </label>
 
                     <button type="submit" id="enter">Enter</button>

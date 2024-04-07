@@ -22,7 +22,7 @@
             <h1>Start voting</h1>
             <form th:action="@{/voting-setup/start/submit/}" method="post" class="">
                 <label>
-                    <input type="text" name="title" value="" placeholder="Title">
+                    <input type="text" name="title" value="" placeholder="Title" required>
                 </label>
                 <button type="submit" id="start">Start</button>
             </form>

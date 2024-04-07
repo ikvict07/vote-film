@@ -9,7 +9,7 @@ import org.fiit.votefilm.model.VotingSession;
 import java.util.List;
 
 /**
- * Entity representing a super user. (Voting host)
+ * Entity representing a Voting host
  */
 @Data
 @Entity

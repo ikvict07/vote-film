@@ -31,7 +31,8 @@ available (they will not be protected by authentication).
 
 - To access the admin panel, go to `http://localhost:8080/admin`
 - To add admin user, use `http://localhost:8080/admin/create-admin-user/` username `admin` and password `admin`
-- To add voting host, use `http://localhost:8080/admin/create-voting-host/` username `host` and password `host`
+- To add voting host, use `http://localhost:8080/admin/create-voting-host/` username `host` and password `host`, or you
+  can use
 
 ### How to run
 
@@ -47,21 +48,52 @@ available (they will not be protected by authentication).
     - Clone the repository
     - Open the terminal and go to the project directory
     - Run `./gradlew bootJar`
-  - Run `java -jar build/libs/vote-film-1.2.0.jar`
+  - Run `java -jar build/libs/vote-film-1.2.1.jar`
   - Or just double-click on the jar file
 
 - #### Use precompiled jar
-  - Download the jar from the [releases](https://github.com/ikvict07/vote-film/releases/tag/first-working-1.2)
-  - Run `java -jar vote-film-1.2.0.jar`
+  - Download the jar from the [releases](https://github.com/ikvict07/vote-film/releases)
+  - Run `java -jar vote-film-1.2.1.jar`
     - Or just double-click on the jar file
 
 - #### Use Docker Repo
     - Install and run Docker
-  - Run `docker pull ikvict/choose-film:1.2`
-  - Run `docker run -p 8080:8080 ikvict/choose-film:1.2`
+  - Run `docker pull ikvict/choose-film:1.2.1`
+  - Run `docker run -p 8080:8080 ikvict/choose-film:1.2.1`
 
 - #### Use Dockerfile
     - Clone the repository
     - Open the terminal and go to the project directory
     - Run `docker build -t choose-film .`
     - Run `docker run -p 8080:8080 choose-film`
+
+### What patterns are used in the project?
+
+- **_MVC_** - ```src/main/java/org/fiit/votefilm/controller``` - all
+  controllers, ```src/main/java/org/fiit/votefilm/model``` - all models, ```src/main/resources/templates``` - all views
+- **_DAO_** - ```src/main/java/org/fiit/votefilm/repository``` - all repositories
+- **_DTO_** - ```src/main/java/org/fiit/votefilm/dto``` - all DTOs
+- **_Singleton_** - ```src/main/java/org/fiit/votefilm/service``` - all services are singletons
+- **_Abstract Factory_** - ```src/main/java/org/fiit/votefilm/service/apiFilm/FilmFactory.java``` - factory for creating
+  film finders
+- **_Facade_** - ```src/main/java/org/fiit/votefilm/service/apiFilm/FindFilmService.java``` - facade for film finding
+- **_Strategy_** - ```src/main/java/org/fiit/votefilm/service/apiFilm/FilmFinder.java``` - interface for film
+  finders, ```src/main/java/org/fiit/votefilm/service/apiFilm/FindFilmService.java``` - context for film finders
+- **_Dependency Injection_** - All services are injected into controllers
+- **_Aggregation_** - ```src/main/java/org/fiit/votefilm/dto/OMDBResponse.java``` - list of ratings inside dto
+- **_Composition_** - ```src/main/java/org/fiit/votefilm/model/users/AbstractUser.java``` - list of roles inside user
+
+### Project Conditions:
+
+- [x] Own Exceptions - ```src/main/java/org/fiit/votefilm/exceptions```
+- [x] GUI divided from logic - [look MVC](#what-patterns-are-used-in-the-project)
+- [x] Explicitly used multithreading - ```src/main/java/org/fiit/votefilm/service/apiFilm/FindFilmService.java```
+- [x] Using generics - ```src/main/java/org/fiit/votefilm/service/apiFilm/ApiResponseHandler.java```
+- [x] Explicitly used RTTI - ```src/main/java/org/fiit/votefilm/controller/RepresentationController.java```
+- [x] Using nested classes - ```src/main/java/org/fiit/votefilm/dto/OMDBResponse.java```
+- [x] Using lambda expressions - almost everywhere,
+  example ```src/main/java/org/fiit/votefilm/service/VotingLogic.java```
+- [x] Using default methods in
+  interfaces - ```src/main/java/org/fiit/votefilm/repository/users/VoterUserRepository.java```
+- [ ] AspectJ
+- [x] Serialization used - ```src/main/java/org/fiit/votefilm/service/apiFilm/FilmFactory.java```

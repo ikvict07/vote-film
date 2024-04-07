@@ -18,7 +18,4 @@ public class TMDBResponse {
 
     @JsonProperty("total_results")
     private int totalResults;
-
-
-
 }

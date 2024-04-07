@@ -7,15 +7,15 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * Repository for super users. (Voting hosts)
+ * Repository for Voting hosts
  */
 @Repository
 public interface VotingHostRepository extends JpaRepository<VotingHost, Long> {
     /**
-     * Find a super user by username. (Voting host)
+     * Find a Voting host by username.
      *
-     * @param username Username of the super user. (Voting host)
-     * @return Super user with the given username. (Voting host)
+     * @param username Username of the Voting host
+     * @return Voting host with the given username.
      */
     Optional<VotingHost> findVotingHostByUsername(String username);
 
