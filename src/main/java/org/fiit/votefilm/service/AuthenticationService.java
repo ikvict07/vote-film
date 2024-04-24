@@ -34,6 +34,15 @@ public class AuthenticationService {
     private final VotingHostRepository votingHostRepository;
     private final AdminRepository adminRepository;
 
+    /**
+     * Constructor for the AuthenticationService.
+     *
+     * @param authenticationManager The authentication manager.
+     * @param userRepository        The repository for users.
+     * @param passwordEncoder       The password encoder.
+     * @param superUserRepository   The repository for super users. (Voting hosts)
+     * @param adminRepository       The repository for admins.
+     */
     @Autowired
     public AuthenticationService(AuthenticationManager authenticationManager, UserRepository userRepository, PasswordEncoder passwordEncoder, VotingHostRepository superUserRepository, AdminRepository adminRepository) {
         this.authenticationManager = authenticationManager;

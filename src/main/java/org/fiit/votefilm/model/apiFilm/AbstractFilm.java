@@ -1,10 +1,6 @@
 package org.fiit.votefilm.model.apiFilm;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import org.fiit.votefilm.model.VotingItem;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -12,11 +8,11 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+
+/**
+ * Abstract class for a film.
+ */
 @Entity
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
 public abstract class AbstractFilm implements Film, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +33,10 @@ public abstract class AbstractFilm implements Film, Serializable {
 
     @OneToMany(mappedBy = "film")
     @Transient
-    @ToString.Exclude
     private List<VotingItem> votingItems;
+
+    public AbstractFilm() {
+    }
 
     @Override
     public boolean equals(Object object) {
@@ -54,5 +52,57 @@ public abstract class AbstractFilm implements Film, Serializable {
     @Override
     public int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public String getLanguage() {
+        return this.language;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getPoster() {
+        return this.poster;
+    }
+
+    public List<VotingItem> getVotingItems() {
+        return this.votingItems;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public void setVotingItems(List<VotingItem> votingItems) {
+        this.votingItems = votingItems;
+    }
+
+    public String toString() {
+        return "AbstractFilm(id=" + this.getId() + ", title=" + this.getTitle() + ", language=" + this.getLanguage() + ", description=" + this.getDescription() + ", poster=" + this.getPoster() + ")";
     }
 }

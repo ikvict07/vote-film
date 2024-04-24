@@ -68,6 +68,11 @@ public class PointController {
         return "redirect:" + referer;
     }
 
+    /**
+     * Handles GET requests to get the points of the current user.
+     *
+     * @return the number of points of the current user
+     */
     @GetMapping("/get/")
     public ResponseEntity<?> getUserPoints() {
         try {

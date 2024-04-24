@@ -50,3 +50,6 @@ tasks.named('test') {
 javadoc {
     destinationDir = file("$buildDir/docs/javadoc")
 }
+compileJava {
+    options.compilerArgs << '-parameters'
+}

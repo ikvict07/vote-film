@@ -1,5 +1,9 @@
 package org.fiit.votefilm.model.apiFilm;
 
+
+/**
+ * Interface for a film.
+ */
 public interface Film {
     Long getId();
 

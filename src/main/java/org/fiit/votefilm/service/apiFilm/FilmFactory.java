@@ -18,12 +18,22 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Optional;
 
+/**
+ * Factory for creating films.
+ */
 @Component
 public class FilmFactory {
     private final FindFilmService findFilmService;
     private final OMDBFilmRepository omdbFilmRepository;
     private final TMDBFilmRepository tmdbFilmRepository;
 
+    /**
+     * Constructor for the FilmFactory.
+     *
+     * @param findFilmService    The service for finding films.
+     * @param omdbFilmRepository The repository for films from the OMDB API.
+     * @param tmdbFilmRepository The repository for films from the TMDB API.
+     */
     @Autowired
     public FilmFactory(FindFilmService findFilmService, OMDBFilmRepository omdbFilmRepository, TMDBFilmRepository tmdbFilmRepository) {
         this.findFilmService = findFilmService;
@@ -31,6 +41,12 @@ public class FilmFactory {
         this.tmdbFilmRepository = tmdbFilmRepository;
     }
 
+    /**
+     * Get a film with the given title.
+     *
+     * @param title The title of the film.
+     * @return The optional film with the given title. Tries to find the film in the cache first, then in the OMDB API and finally in the TMDB API.
+     */
     public Optional<? extends AbstractFilm> getFilm(String title) {
         Optional<AbstractFilm> cachedFilm = loadFilmFromCache(title);
         if (cachedFilm.isPresent()) {
@@ -78,6 +94,11 @@ public class FilmFactory {
         return film;
     }
 
+    /**
+     * Save a film to the cache.
+     *
+     * @param film The film to save.
+     */
     public void saveFilmToCache(AbstractFilm film) {
         try {
             File directory = new File("src/main/resources/cache/");
@@ -94,6 +115,12 @@ public class FilmFactory {
         }
     }
 
+    /**
+     * Load a film from the cache.
+     *
+     * @param title The title of the film.
+     * @return The optional film with the given title.
+     */
     public Optional<AbstractFilm> loadFilmFromCache(String title) {
         AbstractFilm film = null;
 

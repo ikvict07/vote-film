@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Service for finding films.
+ */
 @Service
 public class FindFilmService {
     private final FinderOMDB finderOMDB;
@@ -20,6 +23,13 @@ public class FindFilmService {
         this.finderTMDB = finderTMDB;
     }
 
+
+    /**
+     * Find a film by its title.
+     *
+     * @param title The title of the film.
+     * @return The response entity with the film.
+     */
     public HashMap<FilmType, ResponseEntity<?>> findFilm(String title) {
         AtomicBoolean filmFound = new AtomicBoolean(false);
         AtomicReference<ResponseEntity<?>> omdbResponse = new AtomicReference<>();

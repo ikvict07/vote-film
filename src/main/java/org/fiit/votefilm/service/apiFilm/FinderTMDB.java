@@ -1,7 +1,6 @@
 package org.fiit.votefilm.service.apiFilm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.annotation.PostConstruct;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -12,6 +11,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * Finder for films in the TMDB API.
+ */
 @Component
 public class FinderTMDB implements FilmFinder {
     private final ObjectMapper objectMapper;
@@ -20,14 +22,15 @@ public class FinderTMDB implements FilmFinder {
 
 
     private final TMDBResponseHandler tmdbResponseHandler;
+
+    /**
+     * Constructor for the FinderTMDB.
+     *
+     * @param objectMapper The object mapper.
+     */
     public FinderTMDB(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
         this.tmdbResponseHandler = new TMDBResponseHandler();
-    }
-
-    @PostConstruct
-    public void postConstruct() {
-        System.out.println("API Key: " + apiKey);
     }
 
 
@@ -43,6 +46,13 @@ public class FinderTMDB implements FilmFinder {
                 + "&region=US";
     }
 
+
+    /**
+     * Find a film by its title on the TMDB API.
+     *
+     * @param title The title of the film.
+     * @return The response entity with the film.
+     */
     @Override
     public ResponseEntity<?> findFilm(String title) throws IOException {
         String url = prepareUrl(title);

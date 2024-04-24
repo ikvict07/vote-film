@@ -106,6 +106,11 @@ public class AdminController {
         return "admin-users";
     }
 
+    /**
+     * Create default admin user.
+     *
+     * @return redirect to login page view
+     */
     @GetMapping("/create-admin-user/")
     public String createAdminUser() throws UserAlreadyRegisteredException {
         System.out.println("Creating admin user");
@@ -113,6 +118,11 @@ public class AdminController {
         return "redirect:/auth/login/";
     }
 
+    /**
+     * Create default voting host user.
+     *
+     * @return redirect to login page view
+     */
     @GetMapping("/create-host-user/")
     public String createVotingHost() throws UserAlreadyRegisteredException {
         System.out.println("Creating host user");
