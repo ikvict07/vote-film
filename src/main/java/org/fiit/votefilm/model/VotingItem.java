@@ -60,36 +60,46 @@ public class VotingItem {
         return this.id;
     }
 
-    public String getTitle() {
-        return this.title;
-    }
-
-    public Long getVotes() {
-        return this.votes;
-    }
-
-    public VotingSession getVotingSession() {
-        return this.votingSession;
-    }
-
-    public AbstractFilm getFilm() {
-        return this.film;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return this.title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public Long getVotes() {
+        return this.votes;
+    }
+
     public void setVotes(Long votes) {
         this.votes = votes;
     }
 
+    /**
+     * Get the voting session of the voting item.
+     *
+     * @return The voting session of the voting item.
+     */
+    public VotingSession getVotingSession() {
+        return this.votingSession;
+    }
+
     public void setVotingSession(VotingSession votingSession) {
         this.votingSession = votingSession;
+    }
+
+    /**
+     * Get the film of the voting item.
+     *
+     * @return The film of the voting item.
+     */
+    public AbstractFilm getFilm() {
+        return this.film;
     }
 
     public void setFilm(AbstractFilm film) {

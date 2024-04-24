@@ -5,11 +5,19 @@ import jakarta.persistence.Entity;
 
 import java.io.Serializable;
 
+/**
+ * Entity class for a film from the TMDB API.
+ */
 @Entity
 public class TMDBFilm extends AbstractFilm implements Serializable {
     public TMDBFilm() {
     }
 
+    /**
+     * Get the URL of the poster.
+     *
+     * @return The URL of the poster.
+     */
     @Override
     public String getPoster() {
         return "https://image.tmdb.org/t/p/original" + super.getPoster();
@@ -45,6 +53,12 @@ public class TMDBFilm extends AbstractFilm implements Serializable {
         return Double.compare(this.getPopularity(), other.getPopularity()) == 0;
     }
 
+    /**
+     * Check if the object can be equal to this.
+     *
+     * @param other The object to compare.
+     * @return True if the object can be equal to this, false otherwise.
+     */
     protected boolean canEqual(final Object other) {
         return other instanceof TMDBFilm;
     }

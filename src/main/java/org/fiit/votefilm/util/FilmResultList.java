@@ -4,6 +4,10 @@ import org.fiit.votefilm.dto.MovieResultTMDB;
 
 import java.util.AbstractList;
 
+
+/**
+ * List of film results.
+ */
 public class FilmResultList extends AbstractList<MovieResultTMDB> {
     private Object[] elements;
     private int size = 0;
@@ -45,6 +49,11 @@ public class FilmResultList extends AbstractList<MovieResultTMDB> {
         return true;
     }
 
+    /**
+     * Get the best film.
+     *
+     * @return The best film.
+     */
     public MovieResultTMDB getBestFilm() {
         MovieResultTMDB bestFilm = get(0);
         for (int i = 1; i < size(); i++) {

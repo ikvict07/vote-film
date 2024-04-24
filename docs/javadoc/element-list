@@ -1,0 +1,15 @@
+org.fiit.votefilm
+org.fiit.votefilm.controller
+org.fiit.votefilm.dto
+org.fiit.votefilm.enums
+org.fiit.votefilm.exceptions
+org.fiit.votefilm.model
+org.fiit.votefilm.model.apiFilm
+org.fiit.votefilm.model.users
+org.fiit.votefilm.repository
+org.fiit.votefilm.repository.apiFilm
+org.fiit.votefilm.repository.users
+org.fiit.votefilm.security
+org.fiit.votefilm.service
+org.fiit.votefilm.service.apiFilm
+org.fiit.votefilm.util

@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * Finder for films in the OMDB API.
+ */
 @Component
 public class FinderOMDB implements FilmFinder {
     private final ObjectMapper mapper;
@@ -19,6 +22,11 @@ public class FinderOMDB implements FilmFinder {
 
     private final OMDBResponseHandler omdbResponseHandler;
 
+    /**
+     * Constructor for the FinderOMDB.
+     *
+     * @param mapper The object mapper.
+     */
     public FinderOMDB(ObjectMapper mapper) {
         this.mapper = mapper;
         omdbResponseHandler = new OMDBResponseHandler();
@@ -33,6 +41,12 @@ public class FinderOMDB implements FilmFinder {
         return "http://www.omdbapi.com/?apikey=" + apiKey + "&t=" + prepareTitle(title);
     }
 
+    /**
+     * Find a film by its title on the OMDB API.
+     *
+     * @param title The title of the film.
+     * @return The response entity with the film.
+     */
     @Override
     public ResponseEntity<?> findFilm(String title) throws IOException {
         String url = prepareUrl(title);

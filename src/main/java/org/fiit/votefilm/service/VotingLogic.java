@@ -35,6 +35,16 @@ public class VotingLogic {
     private final OMDBFilmRepository omdbFilmRepository;
     private final FilmFactory filmFactory;
 
+    /**
+     * Constructor for the VotingLogic.
+     *
+     * @param votingItemRepository    The repository for voting items.
+     * @param votingSessionRepository The repository for voting sessions.
+     * @param voterUserRepository     The repository for voter users.
+     * @param tmdbFilmRepository      The repository for TMDB films.
+     * @param omdbFilmRepository      The repository for OMDB films.
+     * @param filmFactory             The factory for films.
+     */
     public VotingLogic(VotingItemRepository votingItemRepository, VotingSessionRepository votingSessionRepository, VoterUserRepository voterUserRepository, TMDBFilmRepository tmdbFilmRepository, OMDBFilmRepository omdbFilmRepository, FilmFactory filmFactory) {
         this.votingItemRepository = votingItemRepository;
         this.votingSessionRepository = votingSessionRepository;

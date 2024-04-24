@@ -6,6 +6,9 @@ import jakarta.persistence.Entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Entity class for a film from the OMDB API.
+ */
 @Entity
 public class OMDBFilm extends AbstractFilm implements Serializable {
     @Column(name = "year", nullable = true)
@@ -26,30 +29,61 @@ public class OMDBFilm extends AbstractFilm implements Serializable {
     public OMDBFilm() {
     }
 
+    /**
+     * Get the URL of the poster.
+     *
+     * @return The URL of the poster.
+     */
     @Override
     public String getPoster() {
         return super.getPoster();
     }
 
+    /**
+     * Get the year of the film.
+     *
+     * @return The year of the film.
+     */
     public String getYear() {
         return this.year;
     }
 
+    /**
+     * Get the genre of the film.
+     *
+     * @return The genre of the film.
+     */
     public String getGenre() {
         return this.genre;
     }
 
+    /**
+     * Get the director of the film.
+     *
+     * @return The director of the film.
+     */
     public String getDirector() {
         return this.director;
     }
 
+    /**
+     * Get the metascore of the film.
+     *
+     * @return The metascore of the film.
+     */
     public String getMetascore() {
         return this.metascore;
     }
 
+    /**
+     * Get the IMDB rating of the film.
+     *
+     * @return The IMDB rating of the film.
+     */
     public String getImdbRating() {
         return this.imdbRating;
     }
+
 
     public void setYear(String year) {
         this.year = year;

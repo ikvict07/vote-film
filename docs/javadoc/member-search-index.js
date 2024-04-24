@@ -1,0 +1,1278 @@
+memberSearchIndex = [{
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "AbstractFilm()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "AbstractUser",
+    "l": "AbstractUser()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.exceptions",
+    "c": "AccessNotAllowed",
+    "l": "AccessNotAllowed(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.util",
+    "c": "FilmResultList",
+    "l": "add(MovieResultTMDB)",
+    "u": "add(org.fiit.votefilm.dto.MovieResultTMDB)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "AuthenticationService",
+    "l": "addAdminWithoutPermission(String, String)",
+    "u": "addAdminWithoutPermission(java.lang.String,java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "AuthenticationService",
+    "l": "addHostWithoutPermission(String, String)",
+    "u": "addHostWithoutPermission(java.lang.String,java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "PointsService",
+    "l": "addPoints(String, int)",
+    "u": "addPoints(java.lang.String,int)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "PointController",
+    "l": "addPoints(String, int, HttpServletRequest)",
+    "u": "addPoints(java.lang.String,int,jakarta.servlet.http.HttpServletRequest)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AdminController",
+    "l": "addSuperUser(HttpServletRequest, String, String)",
+    "u": "addSuperUser(jakarta.servlet.http.HttpServletRequest,java.lang.String,java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AdminController",
+    "l": "addSuperUserForm()"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "AuthenticationService",
+    "l": "addVotingHost(String, String)",
+    "u": "addVotingHost(java.lang.String,java.lang.String)"
+}, {"p": "org.fiit.votefilm.enums", "c": "Role", "l": "ADMIN"}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AdminController",
+    "l": "admin()"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "Admin",
+    "l": "Admin()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "Admin",
+    "l": "Admin(String, String)",
+    "u": "%3Cinit%3E(java.lang.String,java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AdminController",
+    "l": "AdminController(AuthenticationService, VoterUserRepository, PointsService)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.service.AuthenticationService,org.fiit.votefilm.repository.users.VoterUserRepository,org.fiit.votefilm.service.PointsService)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "ApiResponseHandler",
+    "l": "ApiResponseHandler()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AuthController",
+    "l": "AuthController(AuthenticationService)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.service.AuthenticationService)"
+}, {
+    "p": "org.fiit.votefilm.exceptions",
+    "c": "AuthenticationFailedException",
+    "l": "AuthenticationFailedException(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.security",
+    "c": "SecurityConfig",
+    "l": "authenticationManager(AuthenticationConfiguration)",
+    "u": "authenticationManager(org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "AuthenticationService",
+    "l": "AuthenticationService(AuthenticationManager, UserRepository, PasswordEncoder, VotingHostRepository, AdminRepository)",
+    "u": "%3Cinit%3E(org.springframework.security.authentication.AuthenticationManager,org.fiit.votefilm.repository.users.UserRepository,org.springframework.security.crypto.password.PasswordEncoder,org.fiit.votefilm.repository.users.VotingHostRepository,org.fiit.votefilm.repository.users.AdminRepository)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "canEqual(Object)",
+    "u": "canEqual(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "TMDBResponse",
+    "l": "canEqual(Object)",
+    "u": "canEqual(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "canEqual(Object)",
+    "u": "canEqual(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "TMDBFilm",
+    "l": "canEqual(Object)",
+    "u": "canEqual(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "AbstractUser",
+    "l": "canEqual(Object)",
+    "u": "canEqual(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "Admin",
+    "l": "canEqual(Object)",
+    "u": "canEqual(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VoterUser",
+    "l": "canEqual(Object)",
+    "u": "canEqual(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VotingHost",
+    "l": "canEqual(Object)",
+    "u": "canEqual(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "canEqual(Object)",
+    "u": "canEqual(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "canEqual(Object)",
+    "u": "canEqual(java.lang.Object)"
+}, {"p": "org.fiit.votefilm.enums", "c": "Role", "l": "COMMON_USER"}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AdminController",
+    "l": "createAdminUser()"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AdminController",
+    "l": "createVotingHost()"
+}, {
+    "p": "org.fiit.votefilm.security",
+    "c": "SecurityConfig",
+    "l": "customAuthenticationManagerBuilder(AuthenticationManagerBuilder)",
+    "u": "customAuthenticationManagerBuilder(org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "TMDBResponse",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "TMDBFilm",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "AbstractUser",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "Admin",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VoterUser",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VotingHost",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "org.fiit.votefilm.repository.users",
+    "c": "UserRepository",
+    "l": "existsByUsername(String)",
+    "u": "existsByUsername(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.repository.users",
+    "c": "VoterUserRepository",
+    "l": "existsByUsername(String)",
+    "u": "existsByUsername(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "FilmFactory",
+    "l": "FilmFactory(FindFilmService, OMDBFilmRepository, TMDBFilmRepository)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.service.apiFilm.FindFilmService,org.fiit.votefilm.repository.apiFilm.OMDBFilmRepository,org.fiit.votefilm.repository.apiFilm.TMDBFilmRepository)"
+}, {
+    "p": "org.fiit.votefilm.util",
+    "c": "FilmResultList",
+    "l": "FilmResultList()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.util",
+    "c": "FilmResultList",
+    "l": "FilmResultList(int)",
+    "u": "%3Cinit%3E(int)"
+}, {
+    "p": "org.fiit.votefilm.security",
+    "c": "SecurityConfig",
+    "l": "filterChain(HttpSecurity)",
+    "u": "filterChain(org.springframework.security.config.annotation.web.builders.HttpSecurity)"
+}, {
+    "p": "org.fiit.votefilm.repository.users",
+    "c": "AdminRepository",
+    "l": "findAdminByUsername(String)",
+    "u": "findAdminByUsername(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.repository.apiFilm",
+    "c": "FilmRepository",
+    "l": "findByTitle(String)",
+    "u": "findByTitle(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.repository",
+    "c": "VotingSessionRepository",
+    "l": "findByUniqueCode(String)",
+    "u": "findByUniqueCode(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.repository.users",
+    "c": "UserRepository",
+    "l": "findByUsername(String)",
+    "u": "findByUsername(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.repository.users",
+    "c": "VoterUserRepository",
+    "l": "findByUsername(String)",
+    "u": "findByUsername(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "FinderOMDB",
+    "l": "FinderOMDB(ObjectMapper)",
+    "u": "%3Cinit%3E(com.fasterxml.jackson.databind.ObjectMapper)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "FinderTMDB",
+    "l": "FinderTMDB(ObjectMapper)",
+    "u": "%3Cinit%3E(com.fasterxml.jackson.databind.ObjectMapper)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "FilmFinder",
+    "l": "findFilm(String)",
+    "u": "findFilm(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "FinderOMDB",
+    "l": "findFilm(String)",
+    "u": "findFilm(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "FinderTMDB",
+    "l": "findFilm(String)",
+    "u": "findFilm(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "FindFilmService",
+    "l": "findFilm(String)",
+    "u": "findFilm(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "FindFilmService",
+    "l": "FindFilmService(FinderOMDB, FinderTMDB)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.service.apiFilm.FinderOMDB,org.fiit.votefilm.service.apiFilm.FinderTMDB)"
+}, {
+    "p": "org.fiit.votefilm.repository.users",
+    "c": "VotingHostRepository",
+    "l": "findVotingHostByUsername(String)",
+    "u": "findVotingHostByUsername(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.repository",
+    "c": "VotingItemRepository",
+    "l": "findVotingItemByTitle(String)",
+    "u": "findVotingItemByTitle(java.lang.String)"
+}, {"p": "org.fiit.votefilm.model", "c": "VotingSession", "l": "generateUniqueCode()"}, {
+    "p": "org.fiit.votefilm.util",
+    "c": "FilmResultList",
+    "l": "get(int)"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "getActors()"}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "getAuthorities()"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "getAwards()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "getBackdropPath()"
+}, {"p": "org.fiit.votefilm.util", "c": "FilmResultList", "l": "getBestFilm()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getBoxOffice()"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "getCountry()"}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "getCreator()"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "getDescription()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "Film", "l": "getDescription()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getDirector()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "OMDBFilm", "l": "getDirector()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getDvd()"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "getError()"}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "getFilm()"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "FilmFactory",
+    "l": "getFilm(String)",
+    "u": "getFilm(java.lang.String)"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "getGenre()"}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "getGenre()"
+}, {"p": "org.fiit.votefilm.dto", "c": "MovieResultTMDB", "l": "getGenreIds()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "getId()"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "getId()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "Film", "l": "getId()"}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "AbstractUser",
+    "l": "getId()"
+}, {"p": "org.fiit.votefilm.model", "c": "VotingItem", "l": "getId()"}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "getId()"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "getImdbID()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getImdbRating()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "OMDBFilm", "l": "getImdbRating()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getImdbVotes()"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "getLanguage()"}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "getLanguage()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "Film", "l": "getLanguage()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getMetascore()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "OMDBFilm", "l": "getMetascore()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "getOriginalLanguage()"
+}, {"p": "org.fiit.votefilm.dto", "c": "MovieResultTMDB", "l": "getOriginalTitle()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "getOverview()"
+}, {"p": "org.fiit.votefilm.dto", "c": "TMDBResponse", "l": "getPage()"}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "AbstractUser",
+    "l": "getPassword()"
+}, {"p": "org.fiit.votefilm.service", "c": "UserDetailsImpl", "l": "getPassword()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getPlot()"
+}, {"p": "org.fiit.votefilm.model.users", "c": "VoterUser", "l": "getPoints()"}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "PointsService",
+    "l": "getPoints(String)",
+    "u": "getPoints(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "getPopularity()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "TMDBFilm", "l": "getPopularity()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getPoster()"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "getPoster()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "Film", "l": "getPoster()"}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "getPoster()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "TMDBFilm", "l": "getPoster()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "getPosterPath()"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "getProduction()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getRated()"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "getRatings()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getReleased()"
+}, {"p": "org.fiit.votefilm.dto", "c": "MovieResultTMDB", "l": "getReleaseDate()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getResponse()"
+}, {"p": "org.fiit.votefilm.dto", "c": "TMDBResponse", "l": "getResults()"}, {
+    "p": "org.fiit.votefilm.enums",
+    "c": "Role",
+    "l": "getRole()"
+}, {"p": "org.fiit.votefilm.model.users", "c": "AbstractUser", "l": "getRole()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getRuntime()"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "VotingSessionController",
+    "l": "getStartPage()"
+}, {"p": "org.fiit.votefilm.dto", "c": "MovieResultTMDB", "l": "getTitle()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getTitle()"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "getTitle()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "Film", "l": "getTitle()"}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "getTitle()"
+}, {"p": "org.fiit.votefilm.model", "c": "VotingSession", "l": "getTitle()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "TMDBResponse",
+    "l": "getTotalPages()"
+}, {"p": "org.fiit.votefilm.dto", "c": "TMDBResponse", "l": "getTotalResults()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getType()"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "getUniqueCode()"
+}, {"p": "org.fiit.votefilm.model.users", "c": "AbstractUser", "l": "getUsername()"}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "getUsername()"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "PointController",
+    "l": "getUserPoints()"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AdminController",
+    "l": "getUsers(Model)",
+    "u": "getUsers(org.springframework.ui.Model)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "getVoteAverage()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "TMDBFilm", "l": "getVoteAverage()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "getVoteCount()"
+}, {"p": "org.fiit.votefilm.model", "c": "VotingItem", "l": "getVotes()"}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "getVotingItems()"
+}, {"p": "org.fiit.votefilm.model", "c": "VotingSession", "l": "getVotingItems()"}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "VotingLogic",
+    "l": "getVotingItems(String)",
+    "u": "getVotingItems(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VotingHost",
+    "l": "getVotingSession()"
+}, {"p": "org.fiit.votefilm.model", "c": "VotingItem", "l": "getVotingSession()"}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "VotingLogic",
+    "l": "getVotingSession(String)",
+    "u": "getVotingSession(java.lang.String)"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "getWebsite()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "getWriter()"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "getYear()"}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "getYear()"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "OMDBResponseHandler",
+    "l": "handleResponse(OMDBResponse)",
+    "u": "handleResponse(org.fiit.votefilm.dto.OMDBResponse)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "ApiResponseHandler",
+    "l": "handleResponse(T)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "TMDBResponseHandler",
+    "l": "handleResponse(TMDBResponse)",
+    "u": "handleResponse(org.fiit.votefilm.dto.TMDBResponse)"
+}, {"p": "org.fiit.votefilm.dto", "c": "OMDBResponse", "l": "hashCode()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "TMDBResponse",
+    "l": "hashCode()"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "hashCode()"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "hashCode()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "TMDBFilm", "l": "hashCode()"}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "AbstractUser",
+    "l": "hashCode()"
+}, {"p": "org.fiit.votefilm.model.users", "c": "Admin", "l": "hashCode()"}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VoterUser",
+    "l": "hashCode()"
+}, {"p": "org.fiit.votefilm.model.users", "c": "VotingHost", "l": "hashCode()"}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "hashCode()"
+}, {"p": "org.fiit.votefilm.model", "c": "VotingSession", "l": "hashCode()"}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "hashCode()"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "RepresentationController",
+    "l": "index()"
+}, {
+    "p": "org.fiit.votefilm.exceptions",
+    "c": "InvalidSessionIdException",
+    "l": "InvalidSessionIdException(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "isAccountNonExpired()"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "isAccountNonLocked()"
+}, {"p": "org.fiit.votefilm.dto", "c": "MovieResultTMDB", "l": "isAdult()"}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "isCredentialsNonExpired()"
+}, {"p": "org.fiit.votefilm.service", "c": "UserDetailsImpl", "l": "isEnabled()"}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "isOpen()"
+}, {"p": "org.fiit.votefilm.dto", "c": "MovieResultTMDB", "l": "isVideo()"}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "FilmFactory",
+    "l": "loadFilmFromCache(String)",
+    "u": "loadFilmFromCache(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserServiceImpl",
+    "l": "loadUserByUsername(String)",
+    "u": "loadUserByUsername(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AuthController",
+    "l": "login(HttpServletRequest, String, String, RedirectAttributes)",
+    "u": "login(jakarta.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,org.springframework.web.servlet.mvc.support.RedirectAttributes)"
+}, {"p": "org.fiit.votefilm.controller", "c": "AuthController", "l": "loginForm()"}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "AuthenticationService",
+    "l": "loginUser(String, String)",
+    "u": "loginUser(java.lang.String,java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AuthController",
+    "l": "logout(HttpSession)",
+    "u": "logout(jakarta.servlet.http.HttpSession)"
+}, {
+    "p": "org.fiit.votefilm",
+    "c": "VoteFilmApplication",
+    "l": "main(String[])",
+    "u": "main(java.lang.String[])"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "MovieResultTMDB()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.exceptions",
+    "c": "NotEnoughPoints",
+    "l": "NotEnoughPoints(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}, {"p": "org.fiit.votefilm.enums", "c": "FilmType", "l": "OMDB"}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "OMDBFilm()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "OMDBResponse()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "OMDBResponseHandler",
+    "l": "OMDBResponseHandler()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.security",
+    "c": "SecurityConfig",
+    "l": "passwordEncoder()"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "PointController",
+    "l": "PointController(PointsService)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.service.PointsService)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "PointsService",
+    "l": "PointsService(VoterUserRepository)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.repository.users.VoterUserRepository)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AuthController",
+    "l": "register(String, String, RedirectAttributes)",
+    "u": "register(java.lang.String,java.lang.String,org.springframework.web.servlet.mvc.support.RedirectAttributes)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "AuthenticationService",
+    "l": "registerUser(String, String)",
+    "u": "registerUser(java.lang.String,java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "PointsService",
+    "l": "removePoints(String, int)",
+    "u": "removePoints(java.lang.String,int)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "PointController",
+    "l": "removePoints(String, int, HttpServletRequest)",
+    "u": "removePoints(java.lang.String,int,jakarta.servlet.http.HttpServletRequest)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "RepresentationController",
+    "l": "RepresentationController(VotingLogic, FilmFactory)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.service.VotingLogic,org.fiit.votefilm.service.apiFilm.FilmFactory)"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "FilmFactory",
+    "l": "saveFilmToCache(AbstractFilm)",
+    "u": "saveFilmToCache(org.fiit.votefilm.model.apiFilm.AbstractFilm)"
+}, {
+    "p": "org.fiit.votefilm.security",
+    "c": "SecurityConfig",
+    "l": "SecurityConfig()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.util",
+    "c": "FilmResultList",
+    "l": "set(int, MovieResultTMDB)",
+    "u": "set(int,org.fiit.votefilm.dto.MovieResultTMDB)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setActors(String)",
+    "u": "setActors(java.lang.String)"
+}, {"p": "org.fiit.votefilm.dto", "c": "MovieResultTMDB", "l": "setAdult(boolean)"}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "setAuthorities(Collection<? extends GrantedAuthority>)",
+    "u": "setAuthorities(java.util.Collection)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setAwards(String)",
+    "u": "setAwards(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "setBackdropPath(String)",
+    "u": "setBackdropPath(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setBoxOffice(String)",
+    "u": "setBoxOffice(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setCountry(String)",
+    "u": "setCountry(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "setCreator(VotingHost)",
+    "u": "setCreator(org.fiit.votefilm.model.users.VotingHost)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "setDescription(String)",
+    "u": "setDescription(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "Film",
+    "l": "setDescription(String)",
+    "u": "setDescription(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setDirector(String)",
+    "u": "setDirector(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "setDirector(String)",
+    "u": "setDirector(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setDvd(String)",
+    "u": "setDvd(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setError(String)",
+    "u": "setError(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "setFilm(AbstractFilm)",
+    "u": "setFilm(org.fiit.votefilm.model.apiFilm.AbstractFilm)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setGenre(String)",
+    "u": "setGenre(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "setGenre(String)",
+    "u": "setGenre(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "setGenreIds(List<Integer>)",
+    "u": "setGenreIds(java.util.List)"
+}, {"p": "org.fiit.votefilm.dto", "c": "MovieResultTMDB", "l": "setId(int)"}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "setId(Long)",
+    "u": "setId(java.lang.Long)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "Film",
+    "l": "setId(Long)",
+    "u": "setId(java.lang.Long)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "AbstractUser",
+    "l": "setId(Long)",
+    "u": "setId(java.lang.Long)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "setId(Long)",
+    "u": "setId(java.lang.Long)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "setId(Long)",
+    "u": "setId(java.lang.Long)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setImdbID(String)",
+    "u": "setImdbID(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setImdbRating(String)",
+    "u": "setImdbRating(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "setImdbRating(String)",
+    "u": "setImdbRating(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setImdbVotes(String)",
+    "u": "setImdbVotes(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setLanguage(String)",
+    "u": "setLanguage(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "setLanguage(String)",
+    "u": "setLanguage(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "Film",
+    "l": "setLanguage(String)",
+    "u": "setLanguage(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setMetascore(String)",
+    "u": "setMetascore(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "setMetascore(String)",
+    "u": "setMetascore(java.lang.String)"
+}, {"p": "org.fiit.votefilm.model", "c": "VotingSession", "l": "setOpen(boolean)"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "setOriginalLanguage(String)",
+    "u": "setOriginalLanguage(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "setOriginalTitle(String)",
+    "u": "setOriginalTitle(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "setOverview(String)",
+    "u": "setOverview(java.lang.String)"
+}, {"p": "org.fiit.votefilm.dto", "c": "TMDBResponse", "l": "setPage(int)"}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "AbstractUser",
+    "l": "setPassword(String)",
+    "u": "setPassword(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "setPassword(String)",
+    "u": "setPassword(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setPlot(String)",
+    "u": "setPlot(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VoterUser",
+    "l": "setPoints(Long)",
+    "u": "setPoints(java.lang.Long)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "PointsService",
+    "l": "setPoints(String, Long)",
+    "u": "setPoints(java.lang.String,java.lang.Long)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "AdminController",
+    "l": "setPoints(String, Long, HttpServletRequest)",
+    "u": "setPoints(java.lang.String,java.lang.Long,jakarta.servlet.http.HttpServletRequest)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "setPopularity(double)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "TMDBFilm",
+    "l": "setPopularity(double)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setPoster(String)",
+    "u": "setPoster(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "setPoster(String)",
+    "u": "setPoster(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "Film",
+    "l": "setPoster(String)",
+    "u": "setPoster(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "setPosterPath(String)",
+    "u": "setPosterPath(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setProduction(String)",
+    "u": "setProduction(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setRated(String)",
+    "u": "setRated(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setRatings(List<OMDBResponse.Rating>)",
+    "u": "setRatings(java.util.List)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setReleased(String)",
+    "u": "setReleased(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "setReleaseDate(String)",
+    "u": "setReleaseDate(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setResponse(String)",
+    "u": "setResponse(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "TMDBResponse",
+    "l": "setResults(FilmResultList)",
+    "u": "setResults(org.fiit.votefilm.util.FilmResultList)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "AbstractUser",
+    "l": "setRole(Role)",
+    "u": "setRole(org.fiit.votefilm.enums.Role)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setRuntime(String)",
+    "u": "setRuntime(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "setTitle(String)",
+    "u": "setTitle(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setTitle(String)",
+    "u": "setTitle(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "setTitle(String)",
+    "u": "setTitle(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "Film",
+    "l": "setTitle(String)",
+    "u": "setTitle(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "setTitle(String)",
+    "u": "setTitle(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "setTitle(String)",
+    "u": "setTitle(java.lang.String)"
+}, {"p": "org.fiit.votefilm.dto", "c": "TMDBResponse", "l": "setTotalPages(int)"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "TMDBResponse",
+    "l": "setTotalResults(int)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setType(String)",
+    "u": "setType(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "setUniqueCode(String)",
+    "u": "setUniqueCode(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "AbstractUser",
+    "l": "setUsername(String)",
+    "u": "setUsername(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "setUsername(String)",
+    "u": "setUsername(java.lang.String)"
+}, {"p": "org.fiit.votefilm.dto", "c": "MovieResultTMDB", "l": "setVideo(boolean)"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "MovieResultTMDB",
+    "l": "setVoteAverage(double)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "TMDBFilm",
+    "l": "setVoteAverage(double)"
+}, {"p": "org.fiit.votefilm.dto", "c": "MovieResultTMDB", "l": "setVoteCount(int)"}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "setVotes(Long)",
+    "u": "setVotes(java.lang.Long)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "setVotingItems(List<VotingItem>)",
+    "u": "setVotingItems(java.util.List)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "setVotingItems(List<VotingItem>)",
+    "u": "setVotingItems(java.util.List)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VotingHost",
+    "l": "setVotingSession(List<VotingSession>)",
+    "u": "setVotingSession(java.util.List)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "setVotingSession(VotingSession)",
+    "u": "setVotingSession(org.fiit.votefilm.model.VotingSession)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setWebsite(String)",
+    "u": "setWebsite(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setWriter(String)",
+    "u": "setWriter(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "setYear(String)",
+    "u": "setYear(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "setYear(String)",
+    "u": "setYear(java.lang.String)"
+}, {"p": "org.fiit.votefilm.util", "c": "FilmResultList", "l": "size()"}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "VotingService",
+    "l": "startVotingSession(String)",
+    "u": "startVotingSession(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "VotingSessionController",
+    "l": "startVotingSession(String, RedirectAttributes)",
+    "u": "startVotingSession(java.lang.String,org.springframework.web.servlet.mvc.support.RedirectAttributes)"
+}, {"p": "org.fiit.votefilm.enums", "c": "FilmType", "l": "TMDB"}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "TMDBFilm",
+    "l": "TMDBFilm()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "TMDBResponse",
+    "l": "TMDBResponse()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.service.apiFilm",
+    "c": "TMDBResponseHandler",
+    "l": "TMDBResponseHandler()",
+    "u": "%3Cinit%3E()"
+}, {"p": "org.fiit.votefilm.dto", "c": "MovieResultTMDB", "l": "toString()"}, {
+    "p": "org.fiit.votefilm.dto",
+    "c": "OMDBResponse",
+    "l": "toString()"
+}, {"p": "org.fiit.votefilm.dto", "c": "TMDBResponse", "l": "toString()"}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "AbstractFilm",
+    "l": "toString()"
+}, {
+    "p": "org.fiit.votefilm.model.apiFilm",
+    "c": "OMDBFilm",
+    "l": "toString()"
+}, {"p": "org.fiit.votefilm.model.apiFilm", "c": "TMDBFilm", "l": "toString()"}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "AbstractUser",
+    "l": "toString()"
+}, {"p": "org.fiit.votefilm.model.users", "c": "Admin", "l": "toString()"}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VoterUser",
+    "l": "toString()"
+}, {"p": "org.fiit.votefilm.model.users", "c": "VotingHost", "l": "toString()"}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "toString()"
+}, {"p": "org.fiit.votefilm.model", "c": "VotingSession", "l": "toString()"}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "toString()"
+}, {
+    "p": "org.fiit.votefilm.exceptions",
+    "c": "UserAlreadyRegisteredException",
+    "l": "UserAlreadyRegisteredException(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserDetailsImpl",
+    "l": "UserDetailsImpl(String, String, Collection<? extends GrantedAuthority>)",
+    "u": "%3Cinit%3E(java.lang.String,java.lang.String,java.util.Collection)"
+}, {
+    "p": "org.fiit.votefilm.exceptions",
+    "c": "UserIsNotRegisteredException",
+    "l": "UserIsNotRegisteredException(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "UserServiceImpl",
+    "l": "UserServiceImpl()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.enums",
+    "c": "FilmType",
+    "l": "valueOf(String)",
+    "u": "valueOf(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.enums",
+    "c": "Role",
+    "l": "valueOf(String)",
+    "u": "valueOf(java.lang.String)"
+}, {"p": "org.fiit.votefilm.enums", "c": "FilmType", "l": "values()"}, {
+    "p": "org.fiit.votefilm.enums",
+    "c": "Role",
+    "l": "values()"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "VotingLogic",
+    "l": "vote(String, String, Long)",
+    "u": "vote(java.lang.String,java.lang.String,java.lang.Long)"
+}, {
+    "p": "org.fiit.votefilm",
+    "c": "VoteFilmApplication",
+    "l": "VoteFilmApplication()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VoterUser",
+    "l": "VoterUser()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VoterUser",
+    "l": "VoterUser(String, String)",
+    "u": "%3Cinit%3E(java.lang.String,java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "VotingController",
+    "l": "voteSubmit(String, String, Long, HttpServletRequest, RedirectAttributes)",
+    "u": "voteSubmit(java.lang.String,java.lang.String,java.lang.Long,jakarta.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)"
+}, {"p": "org.fiit.votefilm.enums", "c": "Role", "l": "VOTING_HOST"}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "VotingController",
+    "l": "VotingController(VotingLogic)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.service.VotingLogic)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "RepresentationController",
+    "l": "votingEnter()"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "RepresentationController",
+    "l": "votingEnterSubmit(String)",
+    "u": "votingEnterSubmit(java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VotingHost",
+    "l": "VotingHost()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.model.users",
+    "c": "VotingHost",
+    "l": "VotingHost(String, String)",
+    "u": "%3Cinit%3E(java.lang.String,java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "VotingItem()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingItem",
+    "l": "VotingItem(String, VotingSession, AbstractFilm)",
+    "u": "%3Cinit%3E(java.lang.String,org.fiit.votefilm.model.VotingSession,org.fiit.votefilm.model.apiFilm.AbstractFilm)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "RepresentationController",
+    "l": "votingList(Model, String, RedirectAttributes)",
+    "u": "votingList(org.springframework.ui.Model,java.lang.String,org.springframework.web.servlet.mvc.support.RedirectAttributes)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "VotingLogic",
+    "l": "VotingLogic(VotingItemRepository, VotingSessionRepository, VoterUserRepository, TMDBFilmRepository, OMDBFilmRepository, FilmFactory)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.repository.VotingItemRepository,org.fiit.votefilm.repository.VotingSessionRepository,org.fiit.votefilm.repository.users.VoterUserRepository,org.fiit.votefilm.repository.apiFilm.TMDBFilmRepository,org.fiit.votefilm.repository.apiFilm.OMDBFilmRepository,org.fiit.votefilm.service.apiFilm.FilmFactory)"
+}, {
+    "p": "org.fiit.votefilm.service",
+    "c": "VotingService",
+    "l": "VotingService(VotingSessionRepository, VotingHostRepository)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.repository.VotingSessionRepository,org.fiit.votefilm.repository.users.VotingHostRepository)"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "VotingSession()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "org.fiit.votefilm.model",
+    "c": "VotingSession",
+    "l": "VotingSession(VotingHost, String)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.model.users.VotingHost,java.lang.String)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "VotingSessionController",
+    "l": "VotingSessionController(VotingService)",
+    "u": "%3Cinit%3E(org.fiit.votefilm.service.VotingService)"
+}, {
+    "p": "org.fiit.votefilm.controller",
+    "c": "RepresentationController",
+    "l": "votingSpin(Model, String, RedirectAttributes)",
+    "u": "votingSpin(org.springframework.ui.Model,java.lang.String,org.springframework.web.servlet.mvc.support.RedirectAttributes)"
+}, {
+    "p": "org.fiit.votefilm.exceptions",
+    "c": "WrongPasswordException",
+    "l": "WrongPasswordException(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}];
+updateSearchResults();

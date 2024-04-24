@@ -5,7 +5,9 @@ import org.fiit.votefilm.util.FilmResultList;
 
 import java.util.Objects;
 
-
+/**
+ * Represents a response from The Movie Database API.
+ */
 public class TMDBResponse {
     @JsonProperty("page")
     private int page;

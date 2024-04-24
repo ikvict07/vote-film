@@ -16,6 +16,12 @@ public class VotingHost extends VoterUser {
     @OneToMany(mappedBy = "creator")
     private List<VotingSession> votingSession;
 
+    /**
+     * Create a new voting host with 10 000 000 points given.
+     *
+     * @param username The username of the voting host.
+     * @param password The password of the voting host.
+     */
     public VotingHost(String username, String password) {
         super(username, password);
         setPoints(10_000_000L);

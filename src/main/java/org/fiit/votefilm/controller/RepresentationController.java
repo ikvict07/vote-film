@@ -97,9 +97,9 @@ public class RepresentationController {
     /**
      * Adds voting items to the model for the voting page.
      *
-     * @param model              the Model object
+     * @param model              the Model object (Auto-wired)
      * @param id                 the unique code of the voting session
-     * @param redirectAttributes the RedirectAttributes object
+     * @param redirectAttributes the RedirectAttributes object (Auto-wired)
      * @return true if an InvalidSessionIdException is caught, false otherwise
      */
     private boolean addVotingItemsToModel(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
@@ -121,6 +121,15 @@ public class RepresentationController {
         return false;
     }
 
+    /**
+     * Handles GET requests to the film info page.
+     *
+     * @param model              the thymeleaf Model object (Auto-wired)
+     * @param title              the title of the film (Request Parameter)
+     * @param redirectAttributes the RedirectAttributes object (Auto-wired)
+     * @param request            the HttpServletRequest object (Auto-wired)
+     * @return the film info view
+     */
     @GetMapping("/voting/film")
     private String filmInfo(Model model, @RequestParam String title, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         System.out.println("TITLE IS: " + title);

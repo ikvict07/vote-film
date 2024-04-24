@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+/**
+ * Represents a movie result from The Movie Database API.
+ */
 public class MovieResultTMDB {
     @JsonProperty("adult")
     private boolean adult;

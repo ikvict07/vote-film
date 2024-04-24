@@ -19,6 +19,13 @@ public class VoterUser extends AbstractUser {
     public VoterUser() {
     }
 
+
+    /**
+     * Create a new voter user with 100 points.
+     *
+     * @param username The username of the voter.
+     * @param password The password of the voter.
+     */
     public VoterUser(String username, String password) {
         this.setUsername(username);
         this.setPassword(password);
@@ -43,6 +50,12 @@ public class VoterUser extends AbstractUser {
         return Objects.equals(this$points, other$points);
     }
 
+    /**
+     * Check if the object can be equal to this.
+     *
+     * @param other The object to compare.
+     * @return True if the object can be equal to this, false otherwise.
+     */
     protected boolean canEqual(final Object other) {
         return other instanceof VoterUser;
     }

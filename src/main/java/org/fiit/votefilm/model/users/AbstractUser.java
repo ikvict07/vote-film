@@ -5,6 +5,9 @@ import org.fiit.votefilm.enums.Role;
 
 import java.util.Objects;
 
+/**
+ * Abstract class for a user entity.
+ */
 @Entity
 public abstract class AbstractUser {
     @Id
@@ -71,6 +74,12 @@ public abstract class AbstractUser {
         return Objects.equals(this$role, other$role);
     }
 
+    /**
+     * Method to check if the object can be equal to this one.
+     *
+     * @param other object to compare
+     * @return true if the object can be equal to this one, false otherwise
+     */
     protected boolean canEqual(final Object other) {
         return other instanceof AbstractUser;
     }

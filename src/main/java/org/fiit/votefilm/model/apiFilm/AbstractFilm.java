@@ -8,6 +8,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+
+/**
+ * Abstract class for a film.
+ */
 @Entity
 public abstract class AbstractFilm implements Film, Serializable {
     @Id

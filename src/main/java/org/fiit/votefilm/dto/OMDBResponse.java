@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents a movie result from The OMDB Movie Database API.
+ */
 public class OMDBResponse {
     @JsonProperty("Title")
     private String title;

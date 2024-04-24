@@ -22,27 +22,18 @@ public class VotingSession {
 
     @Column(name = "unique_code", nullable = false, unique = true)
     private String uniqueCode;
+    @OneToMany(mappedBy = "votingSession")
+    @Column(name = "voting_items")
+    private List<VotingItem> votingItems;
+    @ManyToOne
+    @JoinColumn(name = "creator_id")
+    private VotingHost creator;
+    @Column(name = "is_open", nullable = false)
+    private boolean isOpen;
 
     public VotingSession() {
 
     }
-
-    @PrePersist
-    protected void generateUniqueCode() {
-        uniqueCode = UUID.randomUUID().toString();
-    }
-
-    @OneToMany(mappedBy = "votingSession")
-    @Column(name = "voting_items")
-    private List<VotingItem> votingItems;
-
-    @ManyToOne
-    @JoinColumn(name = "creator_id")
-    private VotingHost creator;
-
-
-    @Column(name = "is_open", nullable = false)
-    private boolean isOpen;
 
 
     public VotingSession(VotingHost creator, String title) {
@@ -51,48 +42,53 @@ public class VotingSession {
         this.isOpen = true;
     }
 
+    @PrePersist
+    protected void generateUniqueCode() {
+        uniqueCode = UUID.randomUUID().toString();
+    }
+
     public Long getId() {
         return this.id;
-    }
-
-    public String getTitle() {
-        return this.title;
-    }
-
-    public String getUniqueCode() {
-        return this.uniqueCode;
-    }
-
-    public List<VotingItem> getVotingItems() {
-        return this.votingItems;
-    }
-
-    public VotingHost getCreator() {
-        return this.creator;
-    }
-
-    public boolean isOpen() {
-        return this.isOpen;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getUniqueCode() {
+        return this.uniqueCode;
     }
 
     public void setUniqueCode(String uniqueCode) {
         this.uniqueCode = uniqueCode;
     }
 
+    public List<VotingItem> getVotingItems() {
+        return this.votingItems;
+    }
+
     public void setVotingItems(List<VotingItem> votingItems) {
         this.votingItems = votingItems;
     }
 
+    public VotingHost getCreator() {
+        return this.creator;
+    }
+
     public void setCreator(VotingHost creator) {
         this.creator = creator;
+    }
+
+    public boolean isOpen() {
+        return this.isOpen;
     }
 
     public void setOpen(boolean isOpen) {
@@ -123,6 +119,12 @@ public class VotingSession {
         return this.isOpen() == other.isOpen();
     }
 
+    /**
+     * Check if the object can be equal to this one.
+     *
+     * @param other The object to check.
+     * @return True if the object can be equal to this one, false otherwise.
+     */
     protected boolean canEqual(final Object other) {
         return other instanceof VotingSession;
     }
