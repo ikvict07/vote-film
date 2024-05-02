@@ -63,7 +63,7 @@ public class VotingHost extends VoterUser {
     }
 
     public String toString() {
-        return "VotingHost(votingSession=" + this.getVotingSession() + ")";
+        return "VotingHost(name: " + getUsername() + ")";
     }
 
 

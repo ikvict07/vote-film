@@ -147,6 +147,6 @@ public class VotingSession {
     }
 
     public String toString() {
-        return "VotingSession(id=" + this.getId() + ", title=" + this.getTitle() + ", uniqueCode=" + this.getUniqueCode() + ", votingItems=" + this.getVotingItems() + ", creator=" + this.getCreator() + ", isOpen=" + this.isOpen() + ")";
+        return "VotingSession(id=" + this.getId() + ", title=" + this.getTitle() + ", uniqueCode=" + this.getUniqueCode() + ", isOpen=" + this.isOpen() + ")";
     }
 }

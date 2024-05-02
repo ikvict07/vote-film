@@ -107,12 +107,11 @@ public class AuthenticationService {
      */
     public void addVotingHost(String username, String password) throws UserAlreadyRegisteredException, AccessNotAllowed {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-        boolean isVotingHost = authorities.stream()
+        boolean isAdmin = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
-                .anyMatch(Role.VOTING_HOST.getRole()::equals);
-
-        if (!isVotingHost) {
-            throw new AccessNotAllowed("You are not allowed to add points");
+                .anyMatch(Role.ADMIN.getRole()::equals);
+        if (!isAdmin) {
+            throw new AccessNotAllowed("You are not allowed to add hosts");
         }
 
         if (votingHostRepository.findVotingHostByUsername(username).isPresent()) {

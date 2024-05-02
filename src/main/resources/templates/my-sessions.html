@@ -2,15 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Start voting</title>
+    <title>Sessions</title>
     <div th:include="common.html :: commonHead"></div>
-    <style>
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-    </style>
+
 </head>
 <body class="sub_page">
 <div class="hero_area">
@@ -19,13 +13,15 @@
     <section class="info_section layout_padding2"></section>
     <section class="info_section layout_padding">
         <div class="container">
-            <h1>Start voting</h1>
-            <form th:action="@{/voting-setup/start/submit/}" method="post" class="">
-                <label>
-                    <input type="text" name="title" value="" placeholder="Title" required>
-                </label>
-                <button type="submit" id="start">Start</button>
-            </form>
+            <h1>Your voting sessions</h1>
+            <div th:each="my_session : ${mySessions}" data-title="${my_session.title}" data-id="${my_session.id}"
+                 style="display: flex; align-items: center; justify-content: center;">
+                <a th:href="@{'/voting/' + ${my_session.uniqueCode}}">
+                    <p class="text-center text-danger"
+                       th:text="${my_session.title + ' : ' + my_session.uniqueCode}"
+                       style="margin-right: 10px; display: flex; align-items: center; margin-bottom: 0"></p>
+                </a>
+            </div>
         </div>
     </section>
     <section class="info_section layout_padding2"></section>
