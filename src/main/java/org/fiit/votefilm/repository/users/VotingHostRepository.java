@@ -19,4 +19,8 @@ public interface VotingHostRepository extends JpaRepository<VotingHost, Long> {
      */
     Optional<VotingHost> findVotingHostByUsername(String username);
 
+    default boolean existsByUsername(String username) {
+        return findVotingHostByUsername(username).isPresent();
+    }
+
 }

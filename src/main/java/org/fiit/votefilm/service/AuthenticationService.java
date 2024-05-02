@@ -123,7 +123,7 @@ public class AuthenticationService {
     }
 
     public void addAdminWithoutPermission(String username, String password) throws UserAlreadyRegisteredException {
-        if (adminRepository.findAdminByUsername(username).isPresent()) {
+        if (adminRepository.existsByUsername(username)) {
             throw new UserAlreadyRegisteredException("User already exists");
         }
         adminRepository.save(new Admin(username, passwordEncoder.encode(password)));
@@ -131,7 +131,7 @@ public class AuthenticationService {
     }
 
     public void addHostWithoutPermission(String username, String password) throws UserAlreadyRegisteredException {
-        if (votingHostRepository.findVotingHostByUsername(username).isPresent()) {
+        if (votingHostRepository.existsByUsername(username)) {
             throw new UserAlreadyRegisteredException("User already exists");
         }
         votingHostRepository.save(new VotingHost(username, passwordEncoder.encode(password)));

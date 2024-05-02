@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import org.fiit.votefilm.enums.Role;
+import org.fiit.votefilm.exceptions.NotEnoughPoints;
 
 import java.util.Objects;
 
@@ -12,7 +13,7 @@ import java.util.Objects;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class VoterUser extends AbstractUser {
+public class VoterUser extends AbstractUser implements Voter {
 
     private Long points;
 
@@ -70,5 +71,20 @@ public class VoterUser extends AbstractUser {
 
     public String toString() {
         return "VoterUser(points=" + this.getPoints() + ")";
+    }
+
+
+    /**
+     * This method is only used to decrease points.
+     *
+     * @param pointNum The number of points to vote.
+     * @throws NotEnoughPoints If the user does not have enough points to vote.
+     */
+    @Override
+    public void vote(int pointNum) throws NotEnoughPoints {
+        if (pointNum > this.points) {
+            throw new NotEnoughPoints("Not enough points to vote.");
+        }
+        this.points -= pointNum;
     }
 }

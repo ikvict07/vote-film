@@ -65,4 +65,14 @@ public class VotingHost extends VoterUser {
     public String toString() {
         return "VotingHost(votingSession=" + this.getVotingSession() + ")";
     }
+
+
+    /**
+     * We don't want the host to lose point.
+     * This method is useless for this class.
+     */
+    @Override
+    public void vote(int pointsNum) {
+
+    }
 }
