@@ -1,8 +1,10 @@
 package org.fiit.votefilm.repository;
 
 import org.fiit.votefilm.model.VotingSession;
+import org.fiit.votefilm.model.users.VotingHost;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -16,5 +18,7 @@ public interface VotingSessionRepository extends JpaRepository<VotingSession, Lo
      * @return Voting session with the given unique code.
      */
     Optional<VotingSession> findByUniqueCode(String uniqueCode);
+
+    List<VotingSession> findVotingSessionsByCreator(VotingHost host);
 
 }

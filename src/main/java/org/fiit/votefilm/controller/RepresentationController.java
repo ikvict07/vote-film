@@ -7,6 +7,7 @@ import org.fiit.votefilm.model.apiFilm.Film;
 import org.fiit.votefilm.model.apiFilm.OMDBFilm;
 import org.fiit.votefilm.model.apiFilm.TMDBFilm;
 import org.fiit.votefilm.service.VotingLogic;
+import org.fiit.votefilm.service.VotingSessionsService;
 import org.fiit.votefilm.service.apiFilm.FilmFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +27,14 @@ public class RepresentationController {
 
     private final VotingLogic votingLogic;
     private final FilmFactory filmFactory;
+    private final VotingSessionsService votingSessionsService;
 
 
-    public RepresentationController(VotingLogic votingLogic, FilmFactory filmFactory) {
+    public RepresentationController(VotingLogic votingLogic, FilmFactory filmFactory, VotingSessionsService votingSessionsService) {
 
         this.votingLogic = votingLogic;
-
         this.filmFactory = filmFactory;
+        this.votingSessionsService = votingSessionsService;
     }
 
     /**
@@ -148,5 +150,18 @@ public class RepresentationController {
         }
         redirectAttributes.addFlashAttribute("error", "Film not found in the database");
         return "redirect:" + request.getHeader("Referer");
+    }
+
+
+    /**
+     * Controller for Voter Hosts to list all the sessions
+     *
+     * @param model the Model object
+     * @return the sessions of this host
+     */
+    @GetMapping("/voting/my-sessions")
+    private String mySessions(Model model) {
+        model.addAttribute("mySessions", votingSessionsService.getAllVotingSessionsForHost());
+        return "my-sessions";
     }
 }

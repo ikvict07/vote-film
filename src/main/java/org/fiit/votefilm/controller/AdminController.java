@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Controller for the admin page.
@@ -112,9 +113,14 @@ public class AdminController {
      * @return redirect to login page view
      */
     @GetMapping("/create-admin-user/")
-    public String createAdminUser() throws UserAlreadyRegisteredException {
+    public String createAdminUser(RedirectAttributes redirectAttributes) throws UserAlreadyRegisteredException {
         System.out.println("Creating admin user");
-        authenticationService.addAdminWithoutPermission("admin", "admin");
+        try {
+            authenticationService.addAdminWithoutPermission("admin", "admin");
+
+        } catch (UserAlreadyRegisteredException e) {
+            redirectAttributes.addFlashAttribute("error", "User already exists");
+        }
         return "redirect:/auth/login/";
     }
 
@@ -124,9 +130,13 @@ public class AdminController {
      * @return redirect to login page view
      */
     @GetMapping("/create-host-user/")
-    public String createVotingHost() throws UserAlreadyRegisteredException {
+    public String createVotingHost(RedirectAttributes redirectAttributes) throws UserAlreadyRegisteredException {
         System.out.println("Creating host user");
-        authenticationService.addHostWithoutPermission("host", "host");
+        try {
+            authenticationService.addHostWithoutPermission("host", "host");
+        } catch (UserAlreadyRegisteredException e) {
+            redirectAttributes.addFlashAttribute("error", "User already exists");
+        }
         return "redirect:/auth/login/";
     }
 }

@@ -101,4 +101,5 @@ public abstract class AbstractUser {
     public String toString() {
         return "AbstractUser(id=" + this.getId() + ", username=" + this.getUsername() + ", password=" + this.getPassword() + ", role=" + this.getRole() + ")";
     }
+
 }

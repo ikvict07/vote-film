@@ -107,12 +107,11 @@ public class AuthenticationService {
      */
     public void addVotingHost(String username, String password) throws UserAlreadyRegisteredException, AccessNotAllowed {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-        boolean isVotingHost = authorities.stream()
+        boolean isAdmin = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
-                .anyMatch(Role.VOTING_HOST.getRole()::equals);
-
-        if (!isVotingHost) {
-            throw new AccessNotAllowed("You are not allowed to add points");
+                .anyMatch(Role.ADMIN.getRole()::equals);
+        if (!isAdmin) {
+            throw new AccessNotAllowed("You are not allowed to add hosts");
         }
 
         if (votingHostRepository.findVotingHostByUsername(username).isPresent()) {
@@ -123,7 +122,7 @@ public class AuthenticationService {
     }
 
     public void addAdminWithoutPermission(String username, String password) throws UserAlreadyRegisteredException {
-        if (adminRepository.findAdminByUsername(username).isPresent()) {
+        if (adminRepository.existsByUsername(username)) {
             throw new UserAlreadyRegisteredException("User already exists");
         }
         adminRepository.save(new Admin(username, passwordEncoder.encode(password)));
@@ -131,7 +130,7 @@ public class AuthenticationService {
     }
 
     public void addHostWithoutPermission(String username, String password) throws UserAlreadyRegisteredException {
-        if (votingHostRepository.findVotingHostByUsername(username).isPresent()) {
+        if (votingHostRepository.existsByUsername(username)) {
             throw new UserAlreadyRegisteredException("User already exists");
         }
         votingHostRepository.save(new VotingHost(username, passwordEncoder.encode(password)));

@@ -18,12 +18,4 @@ public interface UserRepository extends JpaRepository<AbstractUser, Long> {
      * @return The optional user with the given username.
      */
     Optional<AbstractUser> findByUsername(String username);
-
-    /**
-     * Check if a user with the given username exists.
-     *
-     * @param username The username of the user.
-     * @return True if a user with the given username exists, false otherwise.
-     */
-    Boolean existsByUsername(String username);
 }

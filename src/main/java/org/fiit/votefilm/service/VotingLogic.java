@@ -85,7 +85,7 @@ public class VotingLogic {
         votingItem.setVotes(votingItem.getVotes() + votes);
         votingItemRepository.save(votingItem);
 
-        user.setPoints(user.getPoints() - votes);
+        user.vote(votes.intValue());
         voterUserRepository.save(user);
     }
 
